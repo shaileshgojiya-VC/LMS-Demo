@@ -1,0 +1,229 @@
+2026-01-10 01:32:52,011 - apps.v1.api.auth.view - INFO - view - register_user - Registering user: shailesh@gojiya.com
+2026-01-10 01:32:52,012 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 1: Starting user creation workflow
+2026-01-10 01:32:52,013 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 2: Validating input data
+2026-01-10 01:32:52,014 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 3: Checking if user with email shailesh@gojiya.com already exists
+2026-01-10 01:32:52,073 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 4: Hashing user password
+2026-01-10 01:32:52,608 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 5: Preparing user data for database insertion
+2026-01-10 01:32:52,608 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 6: Creating user in database
+2026-01-10 01:32:52,624 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 7: User created successfully with ID: 1
+2026-01-10 01:32:52,624 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 8: Serializing user data for response
+2026-01-10 01:32:52,625 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 9: Preparing standard response
+2026-01-10 01:43:14,263 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/register
+2026-01-10 01:43:14,264 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 01:43:14,265 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 01:43:14,308 - apps.v1.api.auth.view - INFO - view - register_user - Registering user: shaileshgojiya@gmail.com
+2026-01-10 01:43:14,308 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 1: Starting user creation workflow
+2026-01-10 01:43:14,309 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 2: Validating input data
+2026-01-10 01:43:14,310 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 3: Checking if user with email shaileshgojiya@gmail.com already exists
+2026-01-10 01:43:14,378 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 4: Hashing user password
+2026-01-10 01:43:14,870 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 5: Preparing user data for database insertion
+2026-01-10 01:43:14,870 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 6: Creating user in database
+2026-01-10 01:43:14,891 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 7: User created successfully with ID: 2
+2026-01-10 01:43:14,891 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 8: Serializing user data for response
+2026-01-10 01:43:14,892 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 9: Preparing standard response
+2026-01-10 01:43:14,892 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/register - Status: 201 - Time: 0.630s
+2026-01-10 01:43:21,317 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/login
+2026-01-10 01:43:21,318 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 01:43:21,319 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 01:43:21,320 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/login - Status: 404 - Time: 0.003s
+2026-01-10 01:45:55,463 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/register
+2026-01-10 01:45:55,463 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 01:45:55,464 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 01:45:55,469 - apps.v1.api.auth.view - INFO - view - register_user - Registering user: admin@university.com
+2026-01-10 01:45:55,471 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 1: Starting user creation workflow
+2026-01-10 01:45:55,472 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 2: Validating input data
+2026-01-10 01:45:55,473 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 3: Checking if user with email admin@university.com already exists
+2026-01-10 01:45:55,482 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 4: Hashing user password
+2026-01-10 01:45:56,029 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 5: Preparing user data for database insertion
+2026-01-10 01:45:56,029 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 6: Creating user in database
+2026-01-10 01:45:56,039 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 7: User created successfully with ID: 3
+2026-01-10 01:45:56,039 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 8: Serializing user data for response
+2026-01-10 01:45:56,040 - apps.v1.api.auth.services.create_user_service - INFO - create_user_service - create_user_service - STEP 9: Preparing standard response
+2026-01-10 01:45:56,040 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/register - Status: 201 - Time: 0.578s
+2026-01-10 02:11:50,041 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/login
+2026-01-10 02:11:50,042 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 02:11:50,043 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 02:11:50,084 - apps.v1.api.auth.view - INFO - view - login_user - Login attempt for user: admin@university.com
+2026-01-10 02:11:50,085 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 1: Starting user login workflow
+2026-01-10 02:11:50,087 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 2: Validating input data
+2026-01-10 02:11:50,088 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 3: Fetching user with email admin@university.com
+2026-01-10 02:11:50,153 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 4: User found with ID: 3
+2026-01-10 02:11:50,154 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 5: Verifying user password
+2026-01-10 02:11:50,696 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 6: Password verified successfully
+2026-01-10 02:11:50,697 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 7: Generating JWT access token
+2026-01-10 02:11:50,714 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 8: Generating JWT refresh token
+2026-01-10 02:11:50,715 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 9: Serializing user data for response
+2026-01-10 02:11:50,716 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 10: Preparing response data with tokens
+2026-01-10 02:11:50,716 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 11: Login successful for user: admin@university.com
+2026-01-10 02:11:50,716 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/login - Status: 200 - Time: 0.675s
+2026-01-10 02:12:57,627 - apps.server - INFO - server - dispatch - 📥 Incoming request: GET /docs
+2026-01-10 02:12:57,628 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 02:12:57,629 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 02:12:57,631 - apps.server - INFO - server - dispatch - 📤 Response: GET /docs - Status: 200 - Time: 0.004s
+2026-01-10 02:12:58,268 - apps.server - INFO - server - dispatch - 📥 Incoming request: GET /openapi.json
+2026-01-10 02:12:58,268 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 02:12:58,269 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 02:12:58,298 - apps.server - INFO - server - dispatch - 📤 Response: GET /openapi.json - Status: 200 - Time: 0.030s
+2026-01-10 02:20:52,067 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/login
+2026-01-10 02:20:52,068 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 02:20:52,068 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 02:20:52,107 - apps.v1.api.auth.view - INFO - view - login_user - Login attempt for user: admin@university.com
+2026-01-10 02:20:52,108 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 1: Starting user login workflow
+2026-01-10 02:20:52,109 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 2: Validating input data
+2026-01-10 02:20:52,109 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 3: Fetching user with email admin@university.com
+2026-01-10 02:20:52,167 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 4: User found with ID: 3
+2026-01-10 02:20:52,167 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 5: Verifying user password
+2026-01-10 02:20:52,688 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 6: Password verified successfully
+2026-01-10 02:20:52,688 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 7: Generating JWT access token
+2026-01-10 02:20:52,695 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 8: Generating JWT refresh token
+2026-01-10 02:20:52,695 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 9: Serializing user data for response
+2026-01-10 02:20:52,696 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 10: Preparing response data with tokens
+2026-01-10 02:20:52,696 - apps.v1.api.auth.services.login_user_service - INFO - login_user_service - login_user_service - STEP 11: Login successful for user: admin@university.com
+2026-01-10 02:20:52,697 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/login - Status: 200 - Time: 0.630s
+2026-01-10 02:25:04,833 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/forget-password
+2026-01-10 02:25:04,834 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 02:25:04,835 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 02:25:04,873 - apps.v1.api.auth.view - INFO - view - forget_password - Forget password request for email: gojiyaraju25@gmail.com
+2026-01-10 02:25:04,874 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 1: Starting forget password workflow
+2026-01-10 02:25:04,875 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 2: Validating input data
+2026-01-10 02:25:04,875 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 3: Fetching user with email gojiyaraju25@gmail.com
+2026-01-10 02:25:04,938 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 4: User found with ID: 2
+2026-01-10 02:25:04,939 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 5: Generating password reset token
+2026-01-10 02:25:04,958 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 6: Preparing password reset link
+2026-01-10 02:25:04,959 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 7: Rendering email template
+2026-01-10 02:25:04,961 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 8: Sending password reset email
+2026-01-10 02:25:04,962 - core.utils.email_service - INFO - email_service - send_email - Attempting to send email to gojiyaraju25@gmail.com via email-smtp.us-east-1.amazonaws.com:465
+2026-01-10 02:25:04,963 - core.utils.email_service - DEBUG - email_service - send_email - SMTP User: AKIAT54DL5XT5G35UV6R
+2026-01-10 02:25:08,645 - core.utils.email_service - ERROR - email_service - send_email - SMTP connection error: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+2026-01-10 02:25:08,646 - core.utils.email_service - ERROR - email_service - send_email - Host: email-smtp.us-east-1.amazonaws.com, Port: 465, User: AKIAT54DL5XT5G35UV6R
+2026-01-10 02:25:08,647 - core.utils.email_service - ERROR - email_service - send_email - Using SSL: True, Using STARTTLS: False
+2026-01-10 02:25:08,649 - core.utils.email_service - ERROR - email_service - send_email - Note: If port 465 times out, try port 587 with STARTTLS instead
+2026-01-10 02:25:08,650 - apps.v1.api.auth.services.forget_password_service - ERROR - forget_password_service - forget_password_service - Error during forget password: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+Traceback (most recent call last):
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/auth/services/forget_password_service.py", line 92, in forget_password_service
+    await send_email(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/core/utils/email_service.py", line 109, in send_email
+    await smtp.send_message(message, timeout=15.0)
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1470, in send_message
+    return await self.sendmail(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1354, in sendmail
+    raise exc
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1336, in sendmail
+    await self.mail(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 853, in mail
+    raise SMTPSenderRefused(response.code, response.message, sender)
+aiosmtplib.errors.SMTPSenderRefused: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+2026-01-10 02:25:08,659 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/forget-password - Status: 500 - Time: 3.827s
+2026-01-10 02:28:07,468 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/forget-password
+2026-01-10 02:28:07,469 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 02:28:07,469 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 02:28:07,482 - apps.v1.api.auth.view - INFO - view - forget_password - Forget password request for email: gojiyaraju25@gmail.com
+2026-01-10 02:28:07,482 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 1: Starting forget password workflow
+2026-01-10 02:28:07,483 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 2: Validating input data
+2026-01-10 02:28:07,483 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 3: Fetching user with email gojiyaraju25@gmail.com
+2026-01-10 02:28:07,501 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 4: User found with ID: 2
+2026-01-10 02:28:07,501 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 5: Generating password reset token
+2026-01-10 02:28:07,508 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 6: Preparing password reset link
+2026-01-10 02:28:07,508 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 7: Rendering email template
+2026-01-10 02:28:07,508 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 8: Sending password reset email
+2026-01-10 02:28:07,509 - core.utils.email_service - INFO - email_service - send_email - Attempting to send email to gojiyaraju25@gmail.com via email-smtp.us-east-1.amazonaws.com:465
+2026-01-10 02:28:07,509 - core.utils.email_service - DEBUG - email_service - send_email - SMTP User: AKIAT54DL5XT5G35UV6R
+2026-01-10 02:28:10,509 - core.utils.email_service - ERROR - email_service - send_email - SMTP connection error: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+2026-01-10 02:28:10,510 - core.utils.email_service - ERROR - email_service - send_email - Host: email-smtp.us-east-1.amazonaws.com, Port: 465, User: AKIAT54DL5XT5G35UV6R
+2026-01-10 02:28:10,511 - core.utils.email_service - ERROR - email_service - send_email - Using SSL: True, Using STARTTLS: False
+2026-01-10 02:28:10,512 - core.utils.email_service - ERROR - email_service - send_email - Note: If port 465 times out, try port 587 with STARTTLS instead
+2026-01-10 02:28:10,513 - apps.v1.api.auth.services.forget_password_service - ERROR - forget_password_service - forget_password_service - Error during forget password: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+Traceback (most recent call last):
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/auth/services/forget_password_service.py", line 92, in forget_password_service
+    await send_email(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/core/utils/email_service.py", line 109, in send_email
+    if not username:
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1470, in send_message
+    return await self.sendmail(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1354, in sendmail
+    raise exc
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1336, in sendmail
+    await self.mail(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 853, in mail
+    raise SMTPSenderRefused(response.code, response.message, sender)
+aiosmtplib.errors.SMTPSenderRefused: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+2026-01-10 02:28:10,521 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/forget-password - Status: 500 - Time: 3.053s
+2026-01-10 02:28:48,921 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/forget-password
+2026-01-10 02:28:48,922 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 02:28:48,922 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 02:28:48,935 - apps.v1.api.auth.view - INFO - view - forget_password - Forget password request for email: gojiyaraju25@gmail.com
+2026-01-10 02:28:48,935 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 1: Starting forget password workflow
+2026-01-10 02:28:48,935 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 2: Validating input data
+2026-01-10 02:28:48,935 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 3: Fetching user with email gojiyaraju25@gmail.com
+2026-01-10 02:28:48,956 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 4: User found with ID: 2
+2026-01-10 02:28:48,956 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 5: Generating password reset token
+2026-01-10 02:28:48,965 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 6: Preparing password reset link
+2026-01-10 02:28:48,966 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 7: Rendering email template
+2026-01-10 02:28:48,966 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 8: Sending password reset email
+2026-01-10 02:28:48,966 - apps.v1.api.auth.services.forget_password_service - ERROR - forget_password_service - forget_password_service - Error during forget password: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+Traceback (most recent call last):
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/auth/services/forget_password_service.py", line 92, in forget_password_service
+    await send_email(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/core/utils/email_service.py", line 58, in send_email
+    raise ValueError(
+ValueError: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+2026-01-10 02:28:48,968 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/forget-password - Status: 500 - Time: 0.047s
+2026-01-10 02:28:50,399 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/forget-password
+2026-01-10 02:28:50,400 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 02:28:50,401 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 02:28:50,405 - apps.v1.api.auth.view - INFO - view - forget_password - Forget password request for email: gojiyaraju25@gmail.com
+2026-01-10 02:28:50,406 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 1: Starting forget password workflow
+2026-01-10 02:28:50,407 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 2: Validating input data
+2026-01-10 02:28:50,408 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 3: Fetching user with email gojiyaraju25@gmail.com
+2026-01-10 02:28:50,418 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 4: User found with ID: 2
+2026-01-10 02:28:50,419 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 5: Generating password reset token
+2026-01-10 02:28:50,421 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 6: Preparing password reset link
+2026-01-10 02:28:50,422 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 7: Rendering email template
+2026-01-10 02:28:50,424 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 8: Sending password reset email
+2026-01-10 02:28:50,425 - apps.v1.api.auth.services.forget_password_service - ERROR - forget_password_service - forget_password_service - Error during forget password: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+Traceback (most recent call last):
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/auth/services/forget_password_service.py", line 92, in forget_password_service
+    await send_email(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/core/utils/email_service.py", line 58, in send_email
+    raise ValueError(
+ValueError: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+2026-01-10 02:28:50,428 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/forget-password - Status: 500 - Time: 0.029s
+2026-01-10 02:29:05,770 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/forget-password
+2026-01-10 02:29:05,771 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 02:29:05,772 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 02:29:05,808 - apps.v1.api.auth.view - INFO - view - forget_password - Forget password request for email: gojiyaraju25@gmail.com
+2026-01-10 02:29:05,809 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 1: Starting forget password workflow
+2026-01-10 02:29:05,809 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 2: Validating input data
+2026-01-10 02:29:05,810 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 3: Fetching user with email gojiyaraju25@gmail.com
+2026-01-10 02:29:05,863 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 4: User found with ID: 2
+2026-01-10 02:29:05,865 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 5: Generating password reset token
+2026-01-10 02:29:05,886 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 6: Preparing password reset link
+2026-01-10 02:29:05,886 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 7: Rendering email template
+2026-01-10 02:29:05,888 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 8: Sending password reset email
+2026-01-10 02:29:05,889 - apps.v1.api.auth.services.forget_password_service - ERROR - forget_password_service - forget_password_service - Error during forget password: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+Traceback (most recent call last):
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/auth/services/forget_password_service.py", line 92, in forget_password_service
+    await send_email(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/core/utils/email_service.py", line 58, in send_email
+    raise ValueError(
+ValueError: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+2026-01-10 02:29:05,893 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/forget-password - Status: 500 - Time: 0.123s
+2026-01-10 02:32:34,209 - apps.server - INFO - server - dispatch - 📥 Incoming request: POST /api/v1/auth/forget-password
+2026-01-10 02:32:34,211 - apps.server - INFO - server - dispatch -    Query params: {}
+2026-01-10 02:32:34,211 - apps.server - INFO - server - dispatch -    Client: 127.0.0.1
+2026-01-10 02:32:34,256 - apps.v1.api.auth.view - INFO - view - forget_password - Forget password request for email: gojiyaraju25@gmail.com
+2026-01-10 02:32:34,257 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 1: Starting forget password workflow
+2026-01-10 02:32:34,259 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 2: Validating input data
+2026-01-10 02:32:34,261 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 3: Fetching user with email gojiyaraju25@gmail.com
+2026-01-10 02:32:34,329 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 4: User found with ID: 2
+2026-01-10 02:32:34,330 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 5: Generating password reset token
+2026-01-10 02:32:34,350 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 6: Preparing password reset link
+2026-01-10 02:32:34,351 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 7: Rendering email template
+2026-01-10 02:32:34,352 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 8: Sending password reset email
+2026-01-10 02:32:34,354 - core.utils.email_service - INFO - email_service - send_email - Attempting to send email to gojiyaraju25@gmail.com via email-smtp.us-east-1.amazonaws.com:465
+2026-01-10 02:32:34,355 - core.utils.email_service - DEBUG - email_service - send_email - SMTP User: AKIAT54DL5XT5G35UV6R
+2026-01-10 02:32:38,297 - core.utils.email_service - INFO - email_service - send_email - Email sent successfully to gojiyaraju25@gmail.com
+2026-01-10 02:32:38,297 - apps.v1.api.auth.services.forget_password_service - INFO - forget_password_service - forget_password_service - STEP 9: Password reset email sent successfully to gojiyaraju25@gmail.com
+2026-01-10 02:32:38,299 - apps.server - INFO - server - dispatch - 📤 Response: POST /api/v1/auth/forget-password - Status: 200 - Time: 4.090s

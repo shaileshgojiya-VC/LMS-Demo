@@ -1,0 +1,22 @@
+.
+├── alembic.ini
+├── apps
+├── config
+├── core
+├── main.py
+├── middleware
+├── migrations
+│   ├── env.py
+│   ├── README
+│   ├── script.py.mako
+│   └── versions
+├── __pycache__
+│   └── main.cpython-312.pyc
+├── pyproject.toml
+├── README.md
+├── scripts
+├── structure.tx
+├── tests
+└── uv.lock
+
+9 directories, 10 files

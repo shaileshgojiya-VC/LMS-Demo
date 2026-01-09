@@ -4,6 +4,7 @@ import { GlassBadge } from "@/components/ui/glass-badge"
 import { motion } from "framer-motion"
 import { Users, Clock, BookOpen } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useRouter } from "next/navigation"
 
 interface Course {
   id: string
@@ -24,14 +25,19 @@ interface CourseCardProps {
 }
 
 export function CourseCard({ course, index = 0 }: CourseCardProps) {
+  const router = useRouter()
   const instructorInitials = course.instructor
     .split(" ")
     .map((n) => n[0])
     .join("")
 
+  const handleCardClick = () => {
+    router.push(`/students?course=${encodeURIComponent(course.id)}&courseName=${encodeURIComponent(course.title)}`)
+  }
+
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }}>
-      <GlassCard className="p-0 overflow-hidden">
+      <GlassCard className="p-0 overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform" onClick={handleCardClick}>
         {/* Course Image */}
         <div className="h-40 bg-gradient-to-br from-primary/20 to-accent/20 relative overflow-hidden">
           <img

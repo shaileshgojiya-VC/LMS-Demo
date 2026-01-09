@@ -1,0 +1,61 @@
+2026-01-10 02:25:08,645 - core.utils.email_service - ERROR - email_service - send_email - SMTP connection error: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+2026-01-10 02:25:08,646 - core.utils.email_service - ERROR - email_service - send_email - Host: email-smtp.us-east-1.amazonaws.com, Port: 465, User: AKIAT54DL5XT5G35UV6R
+2026-01-10 02:25:08,647 - core.utils.email_service - ERROR - email_service - send_email - Using SSL: True, Using STARTTLS: False
+2026-01-10 02:25:08,649 - core.utils.email_service - ERROR - email_service - send_email - Note: If port 465 times out, try port 587 with STARTTLS instead
+2026-01-10 02:25:08,650 - apps.v1.api.auth.services.forget_password_service - ERROR - forget_password_service - forget_password_service - Error during forget password: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+Traceback (most recent call last):
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/auth/services/forget_password_service.py", line 92, in forget_password_service
+    await send_email(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/core/utils/email_service.py", line 109, in send_email
+    await smtp.send_message(message, timeout=15.0)
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1470, in send_message
+    return await self.sendmail(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1354, in sendmail
+    raise exc
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1336, in sendmail
+    await self.mail(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 853, in mail
+    raise SMTPSenderRefused(response.code, response.message, sender)
+aiosmtplib.errors.SMTPSenderRefused: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+2026-01-10 02:28:10,509 - core.utils.email_service - ERROR - email_service - send_email - SMTP connection error: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+2026-01-10 02:28:10,510 - core.utils.email_service - ERROR - email_service - send_email - Host: email-smtp.us-east-1.amazonaws.com, Port: 465, User: AKIAT54DL5XT5G35UV6R
+2026-01-10 02:28:10,511 - core.utils.email_service - ERROR - email_service - send_email - Using SSL: True, Using STARTTLS: False
+2026-01-10 02:28:10,512 - core.utils.email_service - ERROR - email_service - send_email - Note: If port 465 times out, try port 587 with STARTTLS instead
+2026-01-10 02:28:10,513 - apps.v1.api.auth.services.forget_password_service - ERROR - forget_password_service - forget_password_service - Error during forget password: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+Traceback (most recent call last):
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/auth/services/forget_password_service.py", line 92, in forget_password_service
+    await send_email(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/core/utils/email_service.py", line 109, in send_email
+    if not username:
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1470, in send_message
+    return await self.sendmail(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1354, in sendmail
+    raise exc
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 1336, in sendmail
+    await self.mail(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/.venv/lib/python3.12/site-packages/aiosmtplib/smtp.py", line 853, in mail
+    raise SMTPSenderRefused(response.code, response.message, sender)
+aiosmtplib.errors.SMTPSenderRefused: (501, 'Invalid MAIL FROM address provided', 'AKIAT54DL5XT5G35UV6R')
+2026-01-10 02:28:48,966 - apps.v1.api.auth.services.forget_password_service - ERROR - forget_password_service - forget_password_service - Error during forget password: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+Traceback (most recent call last):
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/auth/services/forget_password_service.py", line 92, in forget_password_service
+    await send_email(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/core/utils/email_service.py", line 58, in send_email
+    raise ValueError(
+ValueError: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+2026-01-10 02:28:50,425 - apps.v1.api.auth.services.forget_password_service - ERROR - forget_password_service - forget_password_service - Error during forget password: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+Traceback (most recent call last):
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/auth/services/forget_password_service.py", line 92, in forget_password_service
+    await send_email(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/core/utils/email_service.py", line 58, in send_email
+    raise ValueError(
+ValueError: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+2026-01-10 02:29:05,889 - apps.v1.api.auth.services.forget_password_service - ERROR - forget_password_service - forget_password_service - Error during forget password: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.
+Traceback (most recent call last):
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/auth/services/forget_password_service.py", line 92, in forget_password_service
+    await send_email(
+  File "/home/i-m-shailesh/Desktop/LMS_demo/backend/core/utils/email_service.py", line 58, in send_email
+    raise ValueError(
+ValueError: FROM_EMAIL is required and must be a valid email address. Please set FROM_EMAIL environment variable with a valid email address.

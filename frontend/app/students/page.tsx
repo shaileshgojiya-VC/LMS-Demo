@@ -6,11 +6,22 @@ import { StudentsTable } from "@/components/students/students-table"
 import { StatsCard } from "@/components/dashboard/stats-card"
 import { motion } from "framer-motion"
 import { Users, UserPlus, UserCheck, GraduationCap } from "lucide-react"
+import { useSearchParams } from "next/navigation"
+import { Suspense } from "react"
 
-export default function StudentsPage() {
+function StudentsPageContent() {
+  const searchParams = useSearchParams()
+  const courseId = searchParams.get("course")
+  const courseName = searchParams.get("courseName")
+
+  const title = courseName ? `Students - ${courseName}` : "Students"
+  const subtitle = courseName
+    ? `Students enrolled in ${courseName}`
+    : "Manage and track all enrolled students"
+
   return (
     <AppShell>
-      <Header title="Students" subtitle="Manage and track all enrolled students" />
+      <Header title={title} subtitle={subtitle} />
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-stretch">
@@ -36,8 +47,23 @@ export default function StudentsPage() {
 
       {/* Students Table */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-        <StudentsTable />
+        <StudentsTable courseId={courseId || undefined} courseName={courseName || undefined} />
       </motion.div>
     </AppShell>
+  )
+}
+
+export default function StudentsPage() {
+  return (
+    <Suspense fallback={
+      <AppShell>
+        <Header title="Students" subtitle="Loading..." />
+        <div className="flex items-center justify-center h-64">
+          <div className="text-muted-foreground">Loading students...</div>
+        </div>
+      </AppShell>
+    }>
+      <StudentsPageContent />
+    </Suspense>
   )
 }

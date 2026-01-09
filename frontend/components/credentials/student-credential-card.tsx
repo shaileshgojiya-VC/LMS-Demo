@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Award, ExternalLink, CheckCircle, Copy, Check } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { toast } from "sonner"
+import { credentialStorage } from "@/lib/credential-storage"
 
 interface Student {
   id: string
@@ -58,6 +59,22 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
 
       const data = await response.json()
       setCredential(data)
+      
+      // Store the credential for dashboard display
+      credentialStorage.storeCredential({
+        credential_id: data.credential_id,
+        student_id: student.id,
+        student_name: student.name,
+        student_email: student.email,
+        degree: student.degree,
+        program: student.program,
+        institution: "Demo University",
+        issue_date: new Date().toISOString().split("T")[0],
+        verification_url: data.verification_url,
+        status: "issued",
+        issued_at: data.issued_at || new Date().toISOString(),
+      })
+      
       onCredentialIssued?.(student, data)
       toast.success("Credential issued successfully!", {
         description: `Credential ID: ${data.credential_id}`,

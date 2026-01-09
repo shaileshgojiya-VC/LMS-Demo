@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { LayoutDashboard, Users, BookOpen, Award, Settings, ChevronLeft, GraduationCap } from "lucide-react"
 
 const navItems = [
-  { href: "/", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/students", label: "Students", icon: Users },
   { href: "/courses", label: "Courses", icon: BookOpen },
   { href: "/credentials", label: "Credentials", icon: Award },

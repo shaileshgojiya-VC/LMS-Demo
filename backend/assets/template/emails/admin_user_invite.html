@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
+```
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #F5F6F7;
+        font-family: 'Barlow', Arial, sans-serif;
+    }
+
+    img {
+        display: block;
+        border: 0;
+        outline: none;
+    }
+
+    a {
+        color: #1E4383;
+        text-decoration: none;
+    }
+
+    .button {
+        background-color: #1E4383;
+        padding: 14px 32px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        display: inline-block;
+        color: #ffffff;
+    }
+
+    .container {
+        max-width: 640px;
+        margin: auto;
+        background-color: #FFFFFF;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border: 3px solid #1E4383;
+    }
+
+    .content {
+        padding: 0 40px;
+    }
+
+    .footer-link a {
+        color: #666666;
+        text-decoration: none;
+        margin: 0 8px;
+        font-size: 14px;
+    }
+
+    .text {
+        color: #555555;
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 24px;
+    }
+
+    .footer-text {
+        color: #666666;
+        font-size: 14px;
+        line-height: 20px;
+    }
+</style>
+```
+
+</head>
+
+<body>
+    <center style="width: 100%; background-color: #F5F6F7; padding: 40px 0;">
+        <div class="container">
+
+        <!-- Main Content -->
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="content">
+
+                    <!-- Title -->
+                    <h1 style="color: #1A1A1A; font-size: 24px; font-weight: 600; text-align: center; margin-bottom: 32px;">
+                        Your Dana Dairy Admin Account is Ready
+                    </h1>
+
+                    <!-- Greeting -->
+                    <p class="text">Hello <strong>${name}</strong>,</p>
+
+                    <!-- Message -->
+                    <p class="text">
+                        Your Dana Dairy admin account has been successfully created.  
+                        Use the credentials below to log in and complete your initial password change.
+                    </p>
+
+                    <!-- Credentials -->
+                    <p class="text" style="margin-bottom: 16px;">
+                        <strong>Email:</strong> ${user_email}<br>
+                        <strong>Temporary Password:</strong> ${temporary_password}<br>
+                        <span style="color:#777;">(This password will expire after your first successful login.)</span>
+                    </p>
+
+                    <!-- Button -->
+                    <table border="0" cellspacing="0" cellpadding="0" align="center" style="margin: 32px auto;">
+                        <tr>
+                            <td align="center" bgcolor="#1E4383" style="border-radius: 10px;">
+                                <a href="${login_link}" target="_blank" rel="noopener noreferrer"
+                                    style="display: inline-block; padding: 14px 32px; font-family: 'Barlow', Arial, sans-serif; font-size: 16px; font-weight: 600; color: #ffffff; text-decoration: none; border-radius: 8px; line-height: 24px;">
+                                    Go to Admin Portal
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Security Notice -->
+                    <p class="text">
+                        If you did not expect this email or did not request this account setup, please contact the security team immediately.
+                    </p>
+
+                </td>
+            </tr>
+        </table>
+
+        <!-- Sign-off -->
+        <p class="text" style="text-align: left; padding: 0 40px 32px;">
+            Best Regards,<br />
+            <strong>Admin Dana Dairy</strong>
+        </p>
+
+        <!-- Footer -->
+        <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
+            style="max-width: 640px; background-color: #f8f9fa">
+            <tr>
+                <td align="center" style="padding: 20px;">
+                    <p style="color: #666666; font-family: 'Barlow', Arial, sans-serif; font-size: 14px; line-height: 20px; margin:0 0 8px;">
+                        © Dana Dairy. All rights reserved.<br>
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</center>
+```
+
+</body>
+
+</html>
