@@ -128,13 +128,14 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
           >
             <GlassButton
               variant="primary"
+              size="md"
               className="w-full"
               onClick={handleIssueCredential}
               loading={isIssuing}
               icon={<Award className="h-4 w-4" />}
               disabled={student.status !== "completed"}
             >
-              {isIssuing ? "Issuing Credential..." : "Issue Degree Credential"}
+              {isIssuing ? "Issuing Credential..." : "Issue Credential"}
             </GlassButton>
           </motion.div>
         ) : (

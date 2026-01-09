@@ -60,13 +60,17 @@ const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>(
           "inline-flex items-center justify-center gap-2.5 font-medium",
           "transition-all duration-300 ease-out",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-          "disabled:opacity-50 disabled:pointer-events-none",
+          "disabled:pointer-events-none disabled:cursor-not-allowed",
           sizes[size],
           className,
         )}
-        style={{ ...variantStyles[variant], ...style }}
-        whileHover={{ scale: 1.02, y: -1 }}
-        whileTap={{ scale: 0.97 }}
+        style={{ 
+          ...variantStyles[variant], 
+          ...(disabled && { cursor: "not-allowed" }),
+          ...style 
+        }}
+        whileHover={disabled ? {} : { scale: 1.02, y: -1 }}
+        whileTap={disabled ? {} : { scale: 0.97 }}
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
         disabled={disabled || loading}
         {...props}

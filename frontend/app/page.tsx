@@ -4,6 +4,7 @@ import { AppShell } from "@/components/layout/app-shell"
 import { Header } from "@/components/layout/header"
 import { StatsCard } from "@/components/dashboard/stats-card"
 import { RecentActivity } from "@/components/dashboard/recent-activity"
+import { IssuedCredentials } from "@/components/dashboard/issued-credentials"
 import { StudentCredentialCard } from "@/components/credentials/student-credential-card"
 import { motion } from "framer-motion"
 import { Users, BookOpen, Award, TrendingUp } from "lucide-react"
@@ -27,6 +28,13 @@ const completedStudents = [
     completionDate: "2026-01-08",
     status: "completed" as const,
   },
+]
+
+const issuedCredentials = [
+  { id: "EC-2026-001", student: "Michael Chen", degree: "M.S. Data Science", date: "2026-01-02" },
+  { id: "EC-2026-002", student: "Lisa Wang", degree: "B.Tech Computer Science", date: "2026-01-03" },
+  { id: "EC-2026-003", student: "David Kumar", degree: "M.S. AI & ML", date: "2026-01-04" },
+  { id: "EC-2026-004", student: "Sarah Johnson", degree: "Bachelor of Technology", date: "2026-01-05" },
 ]
 
 export default function DashboardPage() {
@@ -71,7 +79,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         {/* Credential Issuance Section */}
         <motion.div
           className="lg:col-span-2 space-y-5"
@@ -114,6 +122,20 @@ export default function DashboardPage() {
           <RecentActivity />
         </motion.div>
       </div>
+
+      {/* Issued Credentials Section */}
+      <motion.div
+        className="space-y-5"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+      >
+        <div>
+          <h2 className="text-lg font-semibold text-foreground">Issued Credentials</h2>
+          <p className="text-sm text-muted-foreground mt-1">Recently issued credentials via EveryCRED</p>
+        </div>
+        <IssuedCredentials credentials={issuedCredentials} />
+      </motion.div>
     </AppShell>
   )
 }

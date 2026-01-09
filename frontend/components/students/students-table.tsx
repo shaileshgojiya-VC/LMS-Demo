@@ -6,9 +6,10 @@ import { GlassBadge } from "@/components/ui/glass-badge"
 import { GlassButton } from "@/components/ui/glass-button"
 import { GlassInput } from "@/components/ui/glass-input"
 import { motion } from "framer-motion"
-import { Search, Filter, MoreHorizontal, Mail, Award } from "lucide-react"
+import { Search, Filter, MoreHorizontal, Mail, Award, UserPlus } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { toast } from "sonner"
 
 const students = [
   {
@@ -63,6 +64,7 @@ const students = [
 
 export function StudentsTable() {
   const [searchQuery, setSearchQuery] = React.useState("")
+  const [issuingCredential, setIssuingCredential] = React.useState<string | null>(null)
 
   const filteredStudents = students.filter(
     (student) =>
@@ -70,6 +72,57 @@ export function StudentsTable() {
       student.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
       student.program.toLowerCase().includes(searchQuery.toLowerCase()),
   )
+
+  const handleIssueCredential = async (student: typeof students[0]) => {
+    setIssuingCredential(student.id)
+
+    try {
+      const response = await fetch("/api/credentials/issue", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          student_name: student.name,
+          degree: getDegreeForProgram(student.program),
+          program: student.program,
+          institution: "Demo University",
+          issue_date: new Date().toISOString().split("T")[0],
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to issue credential")
+      }
+
+      const data = await response.json()
+      toast.success("Credential issued successfully!", {
+        description: `Credential ID: ${data.credential_id}`,
+      })
+    } catch (error) {
+      toast.error("Failed to issue credential", {
+        description: "Please try again later.",
+      })
+    } finally {
+      setIssuingCredential(null)
+    }
+  }
+
+  const getDegreeForProgram = (program: string): string => {
+    const degreeMap: Record<string, string> = {
+      "Computer Science": "Bachelor of Technology",
+      "Data Science": "Master of Science",
+      "Cybersecurity": "Bachelor of Science",
+      "AI & ML": "Master of Science",
+      "Software Engineering": "Bachelor of Technology",
+    }
+    return degreeMap[program] || "Bachelor of Technology"
+  }
+
+  const handleAddNewStudent = () => {
+    toast.info("Add New Student", {
+      description: "Student creation form will open here",
+    })
+    // TODO: Open student creation dialog/form
+  }
 
   return (
     <GlassCard interactive={false} className="p-0 overflow-hidden">
@@ -90,6 +143,9 @@ export function StudentsTable() {
           </div>
           <GlassButton variant="secondary" icon={<Filter className="h-4 w-4" />}>
             Filter
+          </GlassButton>
+          <GlassButton variant="primary" icon={<UserPlus className="h-4 w-4" />} onClick={handleAddNewStudent}>
+            Add New Student
           </GlassButton>
         </div>
       </div>
@@ -165,22 +221,19 @@ export function StudentsTable() {
                       <span className="text-sm text-muted-foreground w-10">{student.progress}%</span>
                     </div>
                   </td>
-                  <td className="px-5 py-4 text-right">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <GlassButton variant="ghost" size="sm">
-                          <MoreHorizontal className="h-4 w-4" />
-                        </GlassButton>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="glass">
-                        <DropdownMenuItem>
-                          <Mail className="h-4 w-4 mr-2" /> Send Email
-                        </DropdownMenuItem>
-                        <DropdownMenuItem disabled={student.progress < 100}>
-                          <Award className="h-4 w-4 mr-2" /> Issue Credential
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                  <td className="px-5 py-4">
+                    <div className="flex items-center justify-end gap-2">
+                      <GlassButton
+                        variant="primary"
+                        size="md"
+                        onClick={() => handleIssueCredential(student)}
+                        loading={issuingCredential === student.id}
+                        disabled={student.progress < 100}
+                        icon={<Award className="h-4 w-4" />}
+                      >
+                        Issue Credential
+                      </GlassButton>
+                    </div>
                   </td>
                 </motion.tr>
               )
