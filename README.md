@@ -1,30 +1,62 @@
-# LMS prototype
+# LMS Demo - EveryCRED Integration
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A modern Learning Management System (LMS) with seamless credential issuance powered by EveryCRED.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/onetestvit-5814s-projects/v0-lms-prototype)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/pKLh8FSm2UQ)
+## Project Structure
 
-## Overview
+```
+LMS-Demo/
+├── frontend/          # Next.js frontend application
+│   ├── app/          # Next.js app router pages
+│   ├── components/   # React components
+│   ├── lib/          # Utility functions
+│   ├── public/       # Static assets
+│   └── ...
+├── backend/          # Backend API (FastAPI - place your boilerplate here)
+└── ...
+```
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## Frontend Setup
 
-## Deployment
+The frontend is a Next.js application located in the `frontend/` directory.
 
-Your project is live at:
+### Prerequisites
 
-**[https://vercel.com/onetestvit-5814s-projects/v0-lms-prototype](https://vercel.com/onetestvit-5814s-projects/v0-lms-prototype)**
+- Node.js 18+ 
+- pnpm (recommended) or npm
 
-## Build your app
+### Installation
 
-Continue building your app on:
+```bash
+cd frontend
+pnpm install
+```
 
-**[https://v0.app/chat/pKLh8FSm2UQ](https://v0.app/chat/pKLh8FSm2UQ)**
+### Development
 
-## How It Works
+```bash
+cd frontend
+pnpm dev
+```
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+The application will be available at `http://localhost:3000`
+
+### Build
+
+```bash
+cd frontend
+pnpm build
+pnpm start
+```
+
+## Backend Setup
+
+Place your backend boilerplate code in the `backend/` folder. The backend should handle EveryCRED API integration and provide REST endpoints for the frontend.
+
+## Features
+
+- Dashboard with student statistics
+- Student management
+- Course management
+- Credential issuance via EveryCRED
+- Modern, responsive UI with glassmorphism design
