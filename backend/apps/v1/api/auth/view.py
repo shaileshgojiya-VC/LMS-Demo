@@ -19,6 +19,9 @@ from apps.v1.api.auth.services.forget_password_service import forget_password_se
 from apps.v1.api.auth.services.login_user_service import login_user_service
 from apps.v1.api.auth.services.refresh_token_service import refresh_token_service
 from apps.v1.api.auth.services.reset_password_service import reset_password_service
+from apps.v1.api.auth.services.get_user_service import get_user_service
+from apps.v1.api.auth.models.model import Users
+from core.utils.auth_dependencies import get_current_user
 from config.db_config import get_async_db
 
 logger = logging.getLogger(__name__)
@@ -123,4 +126,24 @@ async def reset_password(
     """
     logger.info("Password reset request received")
     response = await reset_password_service(db=db, reset_password_data=reset_password_data)
+    return response.make
+
+
+@router.get("/me")
+async def get_current_user_profile(
+    current_user: Users = Depends(get_current_user),
+    db: AsyncSession = Depends(get_async_db),
+):
+    """
+    Get current authenticated user profile.
+
+    Args:
+        current_user: Current authenticated user from dependency
+        db: Async database session
+
+    Returns:
+        StandardResponse with user data or error message
+    """
+    logger.info(f"Fetching current user profile for user ID: {str(current_user.id)}")
+    response = await get_user_service(db=db, current_user=current_user)
     return response.make

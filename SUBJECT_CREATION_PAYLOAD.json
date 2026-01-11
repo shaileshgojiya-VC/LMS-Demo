@@ -1,0 +1,41 @@
+{
+    "name": "Degree",
+    "title": "A Student Degree Certificate Issue Portal",
+    "description": "Academic degree credential issued by the university for LMS demo integration. This credential includes student enrollment information, course details, and completion status.",
+    "template_id": 1,
+    "theme_id": 22,
+    "badge_ids": [],
+    "group_ids": [
+        79
+    ],
+    "subject_field_ids": [
+        {
+            "id": 236,
+            "data_source": "issuer"
+        },
+        {
+            "id": 237,
+            "data_source": "issuer"
+        },
+        {
+            "id": 281,
+            "data_source": "issuer"
+        },
+        {
+            "id": 277,
+            "data_source": "issuer"
+        },
+        {
+            "id": 278,
+            "data_source": "issuer"
+        },
+        {
+            "id": 279,
+            "data_source": "issuer"
+        },
+        {
+            "id": 280,
+            "data_source": "issuer"
+        }
+    ]
+}

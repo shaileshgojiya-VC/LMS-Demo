@@ -8,6 +8,7 @@ import { motion } from "framer-motion"
 import { Users, UserPlus, UserCheck, GraduationCap } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 import { Suspense } from "react"
+import { useStudents } from "@/lib/hooks/use-api"
 
 function StudentsPageContent() {
   const searchParams = useSearchParams()
@@ -19,28 +20,38 @@ function StudentsPageContent() {
     ? `Students enrolled in ${courseName}`
     : "Manage and track all enrolled students"
 
+  // Fetch all students for stats
+  const { data: allStudents } = useStudents(0, 1000)
+  const { data: activeStudents } = useStudents(0, 1000, undefined, undefined, "active")
+  const { data: completedStudents } = useStudents(0, 1000, undefined, undefined, "completed")
+
+  const totalStudents = allStudents?.length || 0
+  const activeCount = activeStudents?.length || 0
+  const completedCount = completedStudents?.length || 0
+
   return (
     <AppShell>
       <Header title={title} subtitle={subtitle} />
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8 items-stretch">
-        <StatsCard title="Total Students" value="2,847" icon={<Users className="h-5 w-5" />} delay={0} />
+        <StatsCard title="Total Students" value={totalStudents.toLocaleString()} icon={<Users className="h-5 w-5" />} delay={0} />
         <StatsCard
-          title="New This Month"
-          value="124"
-          change={18.3}
-          trend="up"
-          icon={<UserPlus className="h-5 w-5" />}
+          title="Active Students"
+          value={activeCount.toLocaleString()}
+          icon={<UserCheck className="h-5 w-5" />}
           delay={0.1}
         />
-        <StatsCard title="Active Students" value="2,456" icon={<UserCheck className="h-5 w-5" />} delay={0.2} />
         <StatsCard
-          title="Graduated"
-          value="391"
-          change={12.1}
-          trend="up"
+          title="Completed"
+          value={completedCount.toLocaleString()}
           icon={<GraduationCap className="h-5 w-5" />}
+          delay={0.2}
+        />
+        <StatsCard
+          title="New This Month"
+          value="—"
+          icon={<UserPlus className="h-5 w-5" />}
           delay={0.3}
         />
       </div>

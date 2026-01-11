@@ -6,25 +6,29 @@ import { apiClient } from "./api-client"
 // ==================== Types ====================
 
 export interface Student {
-  id: string
+  id: number
   name: string
   email: string
-  program: string
-  status: "active" | "inactive"
-  progress: number
-  enrollment_date?: string
-  completion_date?: string
+  program?: string | null
+  status?: "active" | "inactive" | "completed" | "suspended" | null
+  course_id?: number | null
+  enrollment_date?: string | null
+  completion_date?: string | null
+  created_at: string
+  updated_at: string
 }
 
 export interface Course {
-  id: string
-  title: string
-  description: string
-  instructor: string
-  students: number
-  duration: string
-  modules: number
-  status: "active" | "upcoming" | "completed"
+  id: number
+  name: string
+  description?: string | null
+  instructor?: string | null
+  students?: number | null
+  duration?: number | null
+  modules?: number | null
+  status?: "active" | "inactive" | "completed" | "upcoming" | "ongoing" | "cancelled" | null
+  created_at: string
+  updated_at: string
 }
 
 export interface Credential {
@@ -63,14 +67,15 @@ export interface Activity {
 }
 
 export interface CredentialIssueRequest {
-  student_id: string
   student_name: string
-  student_email?: string
+  student_email: string
   degree: string
   program: string
   institution: string
   issue_date: string
-  metadata?: Record<string, unknown>
+  completion_date?: string
+  course_id?: number
+  enrollment_date?: string
 }
 
 export interface CredentialIssueResponse {
@@ -126,47 +131,74 @@ export interface StandardResponse<T> {
 export const api = {
   // Students
   students: {
-    getAll: async (): Promise<Student[]> => {
-      return apiClient.get<Student[]>("/students")
+    getAll: async (
+      skip?: number,
+      limit?: number,
+      search?: string,
+      course_id?: number,
+      status?: string
+    ): Promise<Student[]> => {
+      const params = new URLSearchParams()
+      if (skip !== undefined) params.append("skip", skip.toString())
+      if (limit !== undefined) params.append("limit", limit.toString())
+      if (search) params.append("search", search)
+      if (course_id !== undefined) params.append("course_id", course_id.toString())
+      if (status) params.append("status", status)
+      const queryString = params.toString()
+      const endpoint = `/v1/student${queryString ? `?${queryString}` : ""}`
+      const response = await apiClient.get<StandardResponse<Student[]>>(endpoint)
+      return response.data
     },
 
-    getById: async (id: string): Promise<Student> => {
-      return apiClient.get<Student>(`/students/${id}`)
+    getById: async (id: number): Promise<Student> => {
+      const response = await apiClient.get<StandardResponse<Student>>(`/v1/student/${id}`)
+      return response.data
     },
 
-    create: async (student: Omit<Student, "id">): Promise<Student> => {
-      return apiClient.post<Student>("/students", student)
+    create: async (student: Omit<Student, "id" | "created_at" | "updated_at">): Promise<Student> => {
+      const response = await apiClient.post<StandardResponse<Student>>("/v1/student", student)
+      return response.data
     },
 
-    update: async (id: string, student: Partial<Student>): Promise<Student> => {
-      return apiClient.put<Student>(`/students/${id}`, student)
+    update: async (id: number, student: Partial<Omit<Student, "id" | "created_at" | "updated_at">>): Promise<Student> => {
+      const response = await apiClient.put<StandardResponse<Student>>(`/v1/student/${id}`, student)
+      return response.data
     },
 
-    delete: async (id: string): Promise<void> => {
-      return apiClient.delete<void>(`/students/${id}`)
+    delete: async (id: number): Promise<void> => {
+      await apiClient.delete<StandardResponse<null>>(`/v1/student/${id}`)
     },
   },
 
   // Courses
   courses: {
-    getAll: async (): Promise<Course[]> => {
-      return apiClient.get<Course[]>("/courses")
+    getAll: async (skip?: number, limit?: number): Promise<Course[]> => {
+      const params = new URLSearchParams()
+      if (skip !== undefined) params.append("skip", skip.toString())
+      if (limit !== undefined) params.append("limit", limit.toString())
+      const queryString = params.toString()
+      const endpoint = `/v1/course${queryString ? `?${queryString}` : ""}`
+      const response = await apiClient.get<StandardResponse<Course[]>>(endpoint)
+      return response.data
     },
 
-    getById: async (id: string): Promise<Course> => {
-      return apiClient.get<Course>(`/courses/${id}`)
+    getById: async (id: number): Promise<Course> => {
+      const response = await apiClient.get<StandardResponse<Course>>(`/v1/course/${id}`)
+      return response.data
     },
 
-    create: async (course: Omit<Course, "id">): Promise<Course> => {
-      return apiClient.post<Course>("/courses", course)
+    create: async (course: Omit<Course, "id" | "created_at" | "updated_at">): Promise<Course> => {
+      const response = await apiClient.post<StandardResponse<Course>>("/v1/course", course)
+      return response.data
     },
 
-    update: async (id: string, course: Partial<Course>): Promise<Course> => {
-      return apiClient.put<Course>(`/courses/${id}`, course)
+    update: async (id: number, course: Partial<Omit<Course, "id" | "created_at" | "updated_at">>): Promise<Course> => {
+      const response = await apiClient.put<StandardResponse<Course>>(`/v1/course/${id}`, course)
+      return response.data
     },
 
-    delete: async (id: string): Promise<void> => {
-      return apiClient.delete<void>(`/courses/${id}`)
+    delete: async (id: number): Promise<void> => {
+      await apiClient.delete<StandardResponse<null>>(`/v1/course/${id}`)
     },
   },
 
@@ -181,11 +213,25 @@ export const api = {
     },
 
     issue: async (request: CredentialIssueRequest): Promise<CredentialIssueResponse> => {
-      return apiClient.post<CredentialIssueResponse>("/credentials/issue", request)
+      const response = await apiClient.post<StandardResponse<CredentialIssueResponse>>(
+        "/v1/credentials/issue",
+        request
+      )
+      // Extract data from StandardResponse format
+      if (response && response.data) {
+        return response.data
+      }
+      return response as unknown as CredentialIssueResponse
     },
 
     verify: async (credentialId: string): Promise<{ valid: boolean; data?: unknown }> => {
-      return apiClient.get<{ valid: boolean; data?: unknown }>(`/credentials/${credentialId}/verify`)
+      const response = await apiClient.get<StandardResponse<{ valid: boolean; data?: unknown }>>(
+        `/v1/credentials/verify/${credentialId}`
+      )
+      if (response && response.data) {
+        return response.data
+      }
+      return response as unknown as { valid: boolean; data?: unknown }
     },
 
     revoke: async (credentialId: string, reason?: string): Promise<void> => {
@@ -224,6 +270,13 @@ export const api = {
       const response = await apiClient.post<StandardResponse<AuthResponse>>(
         "/v1/auth/register",
         userData
+      )
+      return response.data
+    },
+
+    getCurrentUser: async (): Promise<AuthUser> => {
+      const response = await apiClient.get<StandardResponse<AuthUser>>(
+        "/v1/auth/me"
       )
       return response.data
     },

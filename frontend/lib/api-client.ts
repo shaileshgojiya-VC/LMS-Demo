@@ -17,7 +17,7 @@ class ApiClient {
 
   private getAuthToken(): string | null {
     if (typeof window === "undefined") return null
-    
+
     try {
       const stored = localStorage.getItem("lms_auth_tokens")
       if (!stored) return null
@@ -33,10 +33,10 @@ class ApiClient {
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`
-    
+
     // Get auth token if available
     const token = this.getAuthToken()
-    
+
     const defaultHeaders: HeadersInit = {
       "Content-Type": "application/json",
     }
@@ -61,10 +61,30 @@ class ApiClient {
         const errorData = await response.json().catch(() => ({
           message: `HTTP error! status: ${response.status}`,
         }))
-        
+
+        // Handle different error formats
+        let errorMessage = `Request failed with status ${response.status}`
+
         // Handle StandardResponse error format
-        const errorMessage = errorData.message || errorData.detail || `Request failed with status ${response.status}`
-        
+        if (errorData.message && typeof errorData.message === "string") {
+          errorMessage = errorData.message
+        }
+        // Handle FastAPI validation errors (422)
+        else if (errorData.detail) {
+          if (Array.isArray(errorData.detail)) {
+            // Pydantic validation errors
+            const validationErrors = errorData.detail
+              .map((err: any) => {
+                const field = err.loc && err.loc.length > 1 ? err.loc[err.loc.length - 1] : "field"
+                return `${field}: ${err.msg || "Invalid value"}`
+              })
+              .join(", ")
+            errorMessage = validationErrors || "Validation error"
+          } else if (typeof errorData.detail === "string") {
+            errorMessage = errorData.detail
+          }
+        }
+
         const error: ApiError = {
           message: errorMessage,
           status: response.status,
@@ -75,9 +95,14 @@ class ApiClient {
       // Handle empty responses
       const contentType = response.headers.get("content-type")
       if (contentType && contentType.includes("application/json")) {
-        return await response.json()
+        const data = await response.json()
+        // Handle StandardResponse format - extract data if present
+        if (data && typeof data === "object" && "data" in data && "status" in data && "message" in data) {
+          return data as T
+        }
+        return data
       }
-      
+
       return {} as T
     } catch (error) {
       if (error instanceof TypeError && error.message === "Failed to fetch") {

@@ -48,8 +48,17 @@ export function useApi<T>(
 }
 
 // Specific hooks for common data fetching
-export function useStudents() {
-  return useApi(() => api.students.getAll(), [])
+export function useStudents(
+  skip?: number,
+  limit?: number,
+  search?: string,
+  course_id?: number,
+  status?: string
+) {
+  return useApi(
+    () => api.students.getAll(skip, limit, search, course_id, status),
+    [skip, limit, search, course_id, status]
+  )
 }
 
 export function useCourses() {
@@ -70,5 +79,9 @@ export function useRecentActivity(limit?: number) {
 
 export function useIssuedCredentials(limit?: number) {
   return useApi(() => api.dashboard.getIssuedCredentials(limit), [limit])
+}
+
+export function useCurrentUser() {
+  return useApi(() => api.auth.getCurrentUser(), [])
 }
 

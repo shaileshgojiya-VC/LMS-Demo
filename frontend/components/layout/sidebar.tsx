@@ -3,13 +3,13 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
-import { LayoutDashboard, Users, BookOpen, Award, Settings, ChevronLeft, GraduationCap } from "lucide-react"
+import { LayoutDashboard, Users, BookOpen, Settings, ChevronLeft, GraduationCap } from "lucide-react"
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/students", label: "Students", icon: Users },
   { href: "/courses", label: "Courses", icon: BookOpen },
-  { href: "/credentials", label: "Credentials", icon: Award },
+  // { href: "/credentials", label: "Credentials", icon: Award },
   { href: "/settings", label: "Settings", icon: Settings },
 ]
 
@@ -56,7 +56,7 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
               <p className="text-xs text-[#64748b] whitespace-nowrap">University LMS</p>
             </motion.div>
           )}
-        </AnimatePresence>  
+        </AnimatePresence>
       </div>
 
       {/* Navigation */}

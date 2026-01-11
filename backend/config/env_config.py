@@ -58,6 +58,14 @@ class Settings(BaseSettings):
 
     # Session
     SESSION_SECRET_KEY: str = ""
+    
+    # EveryCRED Configuration
+    EVERYCRED_API_URL: str = "http://localhost:8000/api/v1"
+    EVERYCRED_API_TOKEN: str = ""
+    EVERYCRED_ISSUER_ID: str = ""
+    EVERYCRED_GROUP_ID: str = ""
+    EVERYCRED_SUBJECT_ID: str = ""
+    EVERYCRED_MOCK_MODE: bool = True
 
 @lru_cache()
 def get_settings() -> Settings:

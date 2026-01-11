@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Bell, Search, Moon, Sun } from "lucide-react"
+import { Bell, Search } from "lucide-react"
 import { GlassInput } from "@/components/ui/glass-input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -13,6 +13,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useCurrentUser } from "@/lib/hooks/use-api"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 interface HeaderProps {
   title: string
@@ -28,12 +31,32 @@ const glassButtonStyle: React.CSSProperties = {
 }
 
 export function Header({ title, subtitle }: HeaderProps) {
-  const [isDark, setIsDark] = React.useState(false)
+  const router = useRouter()
+  const { data: user, loading: userLoading, error: userError } = useCurrentUser()
 
-  const toggleTheme = () => {
-    setIsDark(!isDark)
-    document.documentElement.classList.toggle("dark")
+  const handleSignOut = () => {
+    // Clear auth tokens from localStorage
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("lms_auth_tokens")
+      // Redirect to login page
+      router.push("/login")
+    }
   }
+
+  // Generate initials from user's full name
+  const getInitials = (name: string | undefined): string => {
+    if (!name) return "AD"
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2)
+  }
+
+  // Get display name - use user data if available, otherwise fallback to "Admin"
+  const displayName = user?.full_name || "Admin"
+  const initials = getInitials(user?.full_name)
 
   return (
     <header className="flex items-center justify-between gap-6 mb-8">
@@ -63,16 +86,6 @@ export function Header({ title, subtitle }: HeaderProps) {
         </div>
 
         <motion.button
-          className="p-3 rounded-2xl transition-all duration-300"
-          style={glassButtonStyle}
-          whileHover={{ scale: 1.05, y: -1 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={toggleTheme}
-        >
-          {isDark ? <Sun className="h-5 w-5 text-[#64748b]" /> : <Moon className="h-5 w-5 text-[#64748b]" />}
-        </motion.button>
-
-        <motion.button
           className="p-3 rounded-2xl transition-all duration-300 relative"
           style={glassButtonStyle}
           whileHover={{ scale: 1.05, y: -1 }}
@@ -92,9 +105,13 @@ export function Header({ title, subtitle }: HeaderProps) {
             >
               <Avatar className="h-9 w-9 ring-2 ring-white/50">
                 <AvatarImage src="/admin-user-avatar.png" />
-                <AvatarFallback className="bg-[#1e3a5f] text-white text-xs font-medium">AD</AvatarFallback>
+                <AvatarFallback className="bg-[#1e3a5f] text-white text-xs font-medium">
+                  {userLoading ? "..." : initials}
+                </AvatarFallback>
               </Avatar>
-              <span className="text-sm font-medium text-[#1e3a5f] hidden sm:block">Admin</span>
+              <span className="text-sm font-medium text-[#1e3a5f] hidden sm:block">
+                {userLoading ? "Loading..." : displayName}
+              </span>
             </motion.button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -109,14 +126,17 @@ export function Header({ title, subtitle }: HeaderProps) {
           >
             <DropdownMenuLabel className="text-[#64748b]">My Account</DropdownMenuLabel>
             <DropdownMenuSeparator className="bg-white/40" />
-            <DropdownMenuItem className="rounded-xl hover:bg-white/50 cursor-pointer text-[#1e3a5f]">
-              Profile
+            <DropdownMenuItem asChild className="rounded-xl hover:bg-white/50 cursor-pointer text-[#1e3a5f]">
+              <Link href="/profile">Profile</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className="rounded-xl hover:bg-white/50 cursor-pointer text-[#1e3a5f]">
-              Settings
+            <DropdownMenuItem asChild className="rounded-xl hover:bg-white/50 cursor-pointer text-[#1e3a5f]">
+              <Link href="/settings">Settings</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator className="bg-white/40" />
-            <DropdownMenuItem className="rounded-xl hover:bg-red-50 text-red-500 cursor-pointer">
+            <DropdownMenuItem
+              className="rounded-xl hover:bg-red-50 text-red-500 cursor-pointer"
+              onClick={handleSignOut}
+            >
               Sign Out
             </DropdownMenuItem>
           </DropdownMenuContent>

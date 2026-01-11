@@ -23,6 +23,8 @@ target_metadata = Base.metadata
 
 # add the models to the target metadata
 from apps.v1.api.auth.models.model import Users
+from apps.v1.api.course.models.model import Course
+from apps.v1.api.student.models.model import Student
 
 
 # other values from the config, defined by the needs of env.py,

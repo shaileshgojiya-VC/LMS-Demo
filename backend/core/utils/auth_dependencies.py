@@ -6,9 +6,7 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from sqlalchemy.orm import selectinload
 
-from apps.v1.api.auth.models.methods.method import UserAuthMethod
 from apps.v1.api.auth.models.model import Users
 from config.db_config import get_async_db
 from core.utils.jwt_hanlder import jwt_handler
@@ -69,9 +67,9 @@ async def get_current_user(
                 headers={"WWW-Authenticate": "Bearer"},
             )
 
-        # Fetch user from database with role eagerly loaded to avoid lazy-load IO
+        # Fetch user from database
         stmt = (
-            select(Users).options(selectinload(Users.role)).where(Users.id == user_id_int).limit(1)
+            select(Users).where(Users.id == user_id_int).limit(1)
         )
         result = await db.execute(stmt)
         user = result.scalar_one_or_none()

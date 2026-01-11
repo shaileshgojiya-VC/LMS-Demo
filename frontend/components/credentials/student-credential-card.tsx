@@ -9,6 +9,7 @@ import { Award, ExternalLink, CheckCircle, Copy, Check } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { toast } from "sonner"
 import { credentialStorage } from "@/lib/credential-storage"
+import { api } from "@/lib/api"
 
 interface Student {
   id: string
@@ -41,23 +42,15 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
     setIsIssuing(true)
 
     try {
-      const response = await fetch("/api/credentials/issue", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          student_name: student.name,
-          degree: student.degree,
-          program: student.program,
-          institution: "Demo University",
-          issue_date: new Date().toISOString().split("T")[0],
-        }),
+      const data = await api.credentials.issue({
+        student_name: student.name,
+        student_email: student.email,
+        degree: student.degree,
+        program: student.program,
+        institution: "Demo University",
+        issue_date: new Date().toISOString().split("T")[0],
       })
-
-      if (!response.ok) {
-        throw new Error("Failed to issue credential")
-      }
-
-      const data = await response.json()
+      
       setCredential(data)
       
       // Store the credential for dashboard display
@@ -79,9 +72,9 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
       toast.success("Credential issued successfully!", {
         description: `Credential ID: ${data.credential_id}`,
       })
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Failed to issue credential", {
-        description: "Please try again later.",
+        description: error?.message || "Please try again later.",
       })
     } finally {
       setIsIssuing(false)

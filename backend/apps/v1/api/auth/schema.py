@@ -37,3 +37,20 @@ class ResetPasswordSchema(BaseModel):
 
     token: str = Field(..., description="Password reset token")
     new_password: str = Field(..., min_length=8, description="New password (minimum 8 characters)")
+
+
+class UserResponseSchema(BaseModel):
+    """Schema for user response."""
+
+    id: int = Field(..., description="User ID")
+    email: str = Field(..., description="User email address")
+    full_name: str = Field(..., description="User's full name")
+    is_active: bool = Field(..., description="Whether user is active")
+    is_verified: bool = Field(..., description="Whether user is verified")
+    created_at: str = Field(..., description="Creation timestamp")
+    updated_at: str = Field(..., description="Update timestamp")
+
+    class Config:
+        """Pydantic config."""
+
+        from_attributes = True

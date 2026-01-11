@@ -3,39 +3,46 @@
 import { AppShell } from "@/components/layout/app-shell"
 import { Header } from "@/components/layout/header"
 import { StatsCard } from "@/components/dashboard/stats-card"
-import { RecentActivity } from "@/components/dashboard/recent-activity"
-import { IssuedCredentials } from "@/components/dashboard/issued-credentials"
-import { StudentCredentialCard } from "@/components/credentials/student-credential-card"
+import { CredentialsTable } from "@/components/dashboard/credentials-table"
 import { motion } from "framer-motion"
-import { Users, BookOpen, Award, TrendingUp } from "lucide-react"
+import { Users, BookOpen, TrendingUp, Award } from "lucide-react"
 import { useState, useEffect } from "react"
 import { credentialStorage } from "@/lib/credential-storage"
 import { format } from "date-fns"
 
-const completedStudents = [
-  {
-    id: "1",
-    name: "Emily Davis",
-    email: "emily.d@university.edu",
-    program: "Computer Science",
-    degree: "Bachelor of Technology",
-    completionDate: "2026-01-05",
-    status: "completed" as const,
-  },
-  {
-    id: "2",
-    name: "William Brown",
-    email: "w.brown@university.edu",
-    program: "Data Science",
-    degree: "Master of Science",
-    completionDate: "2026-01-08",
-    status: "completed" as const,
-  },
-]
+// const completedStudents = [
+//   {
+//     id: "1",
+//     name: "Emily Davis",
+//     email: "emily.d@university.edu",
+//     program: "Computer Science",
+//     degree: "Bachelor of Technology",
+//     completionDate: "2026-01-05",
+//     status: "completed" as const,
+//   },
+//   {
+//     id: "2",
+//     name: "William Brown",
+//     email: "w.brown@university.edu",
+//     program: "Data Science",
+//     degree: "Master of Science",
+//     completionDate: "2026-01-08",
+//     status: "completed" as const,
+//   },
+// ]
 
 export default function DashboardPage() {
   const [issuedCredentials, setIssuedCredentials] = useState<
-    Array<{ id: string; student: string; degree: string; date: string }>
+    Array<{ 
+      id: string
+      credential_id: string
+      student: string
+      student_email?: string
+      degree: string
+      program?: string
+      date: string
+      verification_url?: string
+    }>
   >([])
   const [credentialsCount, setCredentialsCount] = useState(0)
 
@@ -44,10 +51,14 @@ export default function DashboardPage() {
     const loadCredentials = () => {
       const recent = credentialStorage.getRecentCredentials(10)
       const formatted = recent.map((cred) => ({
-        id: cred.credential_id,
+        id: cred.id,
+        credential_id: cred.credential_id,
         student: cred.student_name,
+        student_email: cred.student_email,
         degree: cred.degree,
+        program: cred.program,
         date: format(new Date(cred.issued_at), "yyyy-MM-dd"),
+        verification_url: cred.verification_url,
       }))
       setIssuedCredentials(formatted)
       setCredentialsCount(credentialStorage.getTotalCount())
@@ -76,22 +87,6 @@ export default function DashboardPage() {
       window.removeEventListener("credentialIssued", handleCredentialIssued)
     }
   }, [])
-
-  const handleCredentialIssued = () => {
-    // Reload credentials when a new one is issued
-    const recent = credentialStorage.getRecentCredentials(10)
-    const formatted = recent.map((cred) => ({
-      id: cred.credential_id,
-      student: cred.student_name,
-      degree: cred.degree,
-      date: format(new Date(cred.issued_at), "yyyy-MM-dd"),
-    }))
-    setIssuedCredentials(formatted)
-    setCredentialsCount(credentialStorage.getTotalCount())
-    
-    // Dispatch custom event for other components
-    window.dispatchEvent(new Event("credentialIssued"))
-  }
   return (
     <AppShell>
       <Header title="Dashboard" subtitle="Welcome back! Here's what's happening with your LMS today." />
@@ -117,8 +112,6 @@ export default function DashboardPage() {
         <StatsCard
           title="Credentials Issued"
           value={credentialsCount.toLocaleString()}
-          change={credentialsCount > 0 ? undefined : undefined}
-          trend="up"
           icon={<Award className="h-5 w-5" />}
           delay={0.2}
         />
@@ -132,63 +125,18 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        {/* Credential Issuance Section */}
-        <motion.div
-          className="lg:col-span-2 space-y-5"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <div>
-            <h2 className="text-lg font-semibold text-foreground">Ready for Credential Issuance</h2>
-            <p className="text-sm text-muted-foreground mt-1">
-              Students who have completed their programs and are ready for credential issuance via EveryCRED
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            {completedStudents.map((student, index) => (
-              <motion.div
-                key={student.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 + index * 0.1 }}
-              >
-                <StudentCredentialCard student={student} onCredentialIssued={handleCredentialIssued} />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Recent Activity */}
-        <motion.div
-          className="space-y-5"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <div>
-            <h2 className="text-lg font-semibold text-foreground">Recent Activity</h2>
-            <p className="text-sm text-muted-foreground mt-1">Latest updates from your LMS</p>
-          </div>
-          <RecentActivity />
-        </motion.div>
-      </div>
-
-      {/* Issued Credentials Section */}
+      {/* Credentials Table Section */}
       <motion.div
         className="space-y-5"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
+        transition={{ delay: 0.4 }}
       >
         <div>
-          <h2 className="text-lg font-semibold text-foreground">Issued Credentials</h2>
-          <p className="text-sm text-muted-foreground mt-1">Recently issued credentials via EveryCRED</p>
+          <h2 className="text-lg font-semibold text-foreground">Recently Issued Credentials</h2>
+          <p className="text-sm text-muted-foreground mt-1">Detailed listing of credentials issued via EveryCRED</p>
         </div>
-        <IssuedCredentials credentials={issuedCredentials} />
+        <CredentialsTable credentials={issuedCredentials} />
       </motion.div>
     </AppShell>
   )
