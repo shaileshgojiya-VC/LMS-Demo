@@ -5,11 +5,11 @@ import { GlassBadge } from "@/components/ui/glass-badge"
 import { GlassButton } from "@/components/ui/glass-button"
 import { motion } from "framer-motion"
 import { ShieldCheck, ExternalLink, Award, User, Calendar } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 interface CredentialItem {
   id: string
   credential_id: string
+  credential_unique_id?: string
   student: string
   student_email?: string
   degree: string
@@ -24,23 +24,19 @@ interface CredentialsTableProps {
 
 export function CredentialsTable({ credentials }: CredentialsTableProps) {
   const handleVerify = (credential: CredentialItem) => {
-    // Redirect to verification URL if available, otherwise use correct verifier base URL
-    const verifyUrl = credential.verification_url || `https://stg-dcs-verifier-in.everycred.com/${credential.credential_id}`
+    // Use verification_url if available, otherwise construct from credential_unique_id
+    // EveryCRED verifier URL format: https://stg-dcs-verifier-in.everycred.com/{credential_unique_id}
+    const verifyUrl = 
+      credential.verification_url || 
+      (credential.credential_unique_id 
+        ? `https://stg-dcs-verifier-in.everycred.com/${credential.credential_unique_id}`
+        : `https://stg-dcs-verifier-in.everycred.com/${credential.credential_id}`)
     window.open(verifyUrl, "_blank", "noopener,noreferrer")
-  }
-
-  const getInitials = (name: string): string => {
-    return name
-      .split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2)
   }
 
   if (credentials.length === 0) {
     return (
-      <GlassCard interactive={false} className="p-8">
+      <GlassCard interactive={false} className="p-8 rounded-sm">
         <div className="text-center">
           <Award className="h-12 w-12 text-muted-foreground mx-auto mb-4 opacity-50" />
           <p className="text-muted-foreground">No credentials issued yet</p>
@@ -51,7 +47,7 @@ export function CredentialsTable({ credentials }: CredentialsTableProps) {
   }
 
   return (
-    <GlassCard interactive={false} className="p-0 overflow-hidden">
+    <GlassCard interactive={false} className="p-0 overflow-hidden rounded-sm">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
@@ -81,7 +77,6 @@ export function CredentialsTable({ credentials }: CredentialsTableProps) {
           </thead>
           <tbody className="divide-y divide-border/30">
             {credentials.map((cred, index) => {
-              const initials = getInitials(cred.student)
               return (
                 <motion.tr
                   key={cred.id}
@@ -91,19 +86,11 @@ export function CredentialsTable({ credentials }: CredentialsTableProps) {
                   transition={{ delay: index * 0.05 }}
                 >
                   <td className="px-5 py-4">
-                    <div className="flex items-center gap-3">
-                      <Avatar className="h-9 w-9">
-                        <AvatarImage
-                          src={`/placeholder.svg?height=36&width=36&query=${cred.student} portrait`}
-                        />
-                        <AvatarFallback className="bg-primary/10 text-primary text-xs">{initials}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-medium text-foreground text-sm">{cred.student}</p>
-                        {cred.student_email && (
-                          <p className="text-xs text-muted-foreground">{cred.student_email}</p>
-                        )}
-                      </div>
+                    <div>
+                      <p className="font-medium text-foreground text-sm">{cred.student}</p>
+                      {cred.student_email && (
+                        <p className="text-xs text-muted-foreground">{cred.student_email}</p>
+                      )}
                     </div>
                   </td>
                   <td className="px-5 py-4">

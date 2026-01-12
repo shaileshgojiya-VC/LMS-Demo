@@ -34,15 +34,19 @@ export interface Course {
 export interface Credential {
   id: string
   credential_id: string
-  student_id: string
-  student_name: string
+  credential_unique_id?: string
+  student_id?: string
+  student_name?: string
+  student?: string
+  student_email?: string
   degree: string
   program: string
-  institution: string
-  issue_date: string
+  institution?: string
+  issue_date?: string
+  date?: string
   verification_url?: string
   status: "issued" | "pending" | "revoked"
-  issued_at: string
+  issued_at?: string
 }
 
 export interface DashboardStats {
@@ -206,6 +210,22 @@ export const api = {
   credentials: {
     getAll: async (): Promise<Credential[]> => {
       return apiClient.get<Credential[]>("/credentials")
+    },
+
+    getList: async (
+      page?: number,
+      size?: number,
+      credential_status?: string,
+      issuer_id?: number
+    ): Promise<StandardResponse<{ credentials: Credential[]; total: number; page: number; size: number }>> => {
+      const params = new URLSearchParams()
+      if (page !== undefined) params.append("page", page.toString())
+      if (size !== undefined) params.append("size", size.toString())
+      if (credential_status) params.append("credential_status", credential_status)
+      if (issuer_id !== undefined) params.append("issuer_id", issuer_id.toString())
+      const queryString = params.toString()
+      const endpoint = `/v1/credentials/list${queryString ? `?${queryString}` : ""}`
+      return apiClient.get<StandardResponse<{ credentials: Credential[]; total: number; page: number; size: number }>>(endpoint)
     },
 
     getById: async (id: string): Promise<Credential> => {

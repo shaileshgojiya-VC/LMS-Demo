@@ -155,7 +155,7 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
 
   if (error) {
     return (
-      <GlassCard interactive={false} className="p-8">
+      <GlassCard interactive={false} className="p-8 rounded-sm">
         <div className="text-center">
           <p className="text-red-500 mb-4">Error loading students: {error}</p>
           <GlassButton variant="primary" onClick={() => refetch()}>
@@ -168,7 +168,7 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
 
   return (
     <>
-      <GlassCard interactive={false} className="p-0 overflow-hidden">
+      <GlassCard interactive={false} className="p-0 overflow-hidden rounded-sm">
         {/* Header */}
         <div className="p-5 border-b border-border/30 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
           <div className="flex-1">

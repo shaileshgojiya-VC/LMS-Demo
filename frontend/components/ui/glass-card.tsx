@@ -13,17 +13,19 @@ interface GlassCardProps extends HTMLMotionProps<"div"> {
 const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
   ({ className, variant = "default", interactive = true, glow = true, children, style, ...props }, ref) => {
     const glassStyle: React.CSSProperties = {
-      background: "rgba(255, 255, 255, 0.65)",
-      backdropFilter: "blur(24px) saturate(180%)",
-      WebkitBackdropFilter: "blur(24px) saturate(180%)",
-      border: "1px solid rgba(255, 255, 255, 0.6)",
+      background: "oklch(0.995 0 0 / 0.5)",
+      backdropFilter: "blur(40px) saturate(2.2)",
+      WebkitBackdropFilter: "blur(40px) saturate(2.2)",
+      border: "0.5px solid oklch(1 0 0 / 0.25)",
       boxShadow: glow
-        ? `0 0 0 1px rgba(255,255,255,0.7),
-           0 2px 8px rgba(0,0,0,0.04),
-           0 8px 24px rgba(0,0,0,0.06),
-           inset 0 1px 0 rgba(255,255,255,0.9)`
-        : `0 2px 8px rgba(0,0,0,0.04),
-           0 8px 24px rgba(0,0,0,0.06)`,
+        ? `0 0 0 0.5px oklch(1 0 0 / 0.2),
+           0 1px 2px oklch(0.3 0.05 250 / 0.02),
+           0 4px 12px oklch(0.3 0.05 250 / 0.03),
+           0 12px 32px oklch(0.3 0.05 250 / 0.04),
+           inset 0 1px 1px oklch(1 0 0 / 0.6)`
+        : `0 1px 2px oklch(0.3 0.05 250 / 0.02),
+           0 4px 12px oklch(0.3 0.05 250 / 0.03),
+           0 12px 32px oklch(0.3 0.05 250 / 0.04)`,
       ...style,
     }
 

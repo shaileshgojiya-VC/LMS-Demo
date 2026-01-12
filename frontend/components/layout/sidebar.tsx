@@ -25,17 +25,18 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
     <aside
       className={cn(
         "fixed left-0 top-0 h-screen z-50",
-        "bg-white/60 backdrop-blur-2xl saturate-150",
-        "border-r border-white/60",
+        "bg-white/50 backdrop-blur-[40px] saturate-[2.2]",
+        "border-r border-white/25",
         "flex flex-col transition-all duration-300 ease-out",
         collapsed ? "w-20" : "w-[280px]",
       )}
       style={{
         boxShadow: `
-          0 0 0 1px rgba(255,255,255,0.8),
-          0 4px 16px rgba(0,0,0,0.04),
-          0 8px 32px rgba(0,0,0,0.06),
-          inset 0 1px 0 rgba(255,255,255,0.9)
+          0 0 0 0.5px oklch(1 0 0 / 0.2),
+          0 1px 2px oklch(0.3 0.05 250 / 0.02),
+          0 4px 12px oklch(0.3 0.05 250 / 0.03),
+          0 12px 32px oklch(0.3 0.05 250 / 0.04),
+          inset 0 1px 1px oklch(1 0 0 / 0.6)
         `,
       }}
     >
@@ -96,16 +97,17 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
       </nav>
 
       {/* Collapse Toggle */}
-      <div className="p-4 border-t border-white/40">
+      <div className="p-4 border-t border-white/40 flex items-center justify-center">
         <motion.button
           onClick={onToggle}
           className={cn(
-            "w-full flex items-center justify-center gap-2 px-4 py-3 rounded-2xl",
-            "text-[#64748b] hover:bg-white/60 hover:text-[#1e3a5f]",
+            "h-10 w-10 rounded-full flex items-center justify-center",
+            "bg-[#1e3a5f] text-white",
+            "hover:bg-[#2a4a7a] shadow-lg",
             "transition-all duration-300",
           )}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
         >
           <motion.div
             animate={{ rotate: collapsed ? 180 : 0 }}
@@ -113,18 +115,6 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
           >
             <ChevronLeft className="h-5 w-5" />
           </motion.div>
-          <AnimatePresence>
-            {!collapsed && (
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-sm font-medium"
-              >
-                Collapse
-              </motion.span>
-            )}
-          </AnimatePresence>
         </motion.button>
       </div>
     </aside>

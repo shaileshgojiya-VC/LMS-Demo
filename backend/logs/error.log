@@ -3199,3 +3199,383 @@ Traceback (most recent call last):
   File "/home/i-m-shailesh/Desktop/LMS_demo/backend/apps/v1/api/credentials/services/everycred_service.py", line 118, in _make_request
     raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
 Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:12:34,307 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials: 'EveryCREDService' object has no attribute 'get_credentials_list'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 140, in get_credentials_list
+    credentials_response = await everycred_service.get_credentials_list(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EveryCREDService' object has no attribute 'get_credentials_list'
+2026-01-12 15:14:07,565 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials: 'EveryCREDService' object has no attribute 'get_credentials_list'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 140, in get_credentials_list
+    credentials_response = await everycred_service.get_credentials_list(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EveryCREDService' object has no attribute 'get_credentials_list'
+2026-01-12 15:14:07,596 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials: 'EveryCREDService' object has no attribute 'get_credentials_list'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 140, in get_credentials_list
+    credentials_response = await everycred_service.get_credentials_list(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EveryCREDService' object has no attribute 'get_credentials_list'
+2026-01-12 15:16:41,934 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:16:41,935 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 96, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 158, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 112, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:16:41,967 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:16:41,967 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 96, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 158, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 112, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:17:52,691 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:17:52,692 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 130, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 146, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:17:53,806 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:17:53,807 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 130, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 146, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:18:09,335 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:18:09,335 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 130, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 146, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:18:09,363 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:18:09,364 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 130, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 146, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:18:13,053 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:18:13,053 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 130, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 146, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:06,085 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - 401 Unauthorized - Response body: {'status': 401, 'data': None, 'message': 'authentication token is required'}
+2026-01-12 15:19:06,085 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:06,085 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 159, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 175, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:10,183 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - 401 Unauthorized - Response body: {'status': 401, 'data': None, 'message': 'authentication token is required'}
+2026-01-12 15:19:10,183 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:10,183 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 159, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 175, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:39,308 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - 401 Unauthorized - Response body: {'status': 401, 'data': None, 'message': 'authentication token is required'}
+2026-01-12 15:19:39,309 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:39,309 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 159, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 175, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:40,730 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - 401 Unauthorized - Response body: {'status': 401, 'data': None, 'message': 'authentication token is required'}
+2026-01-12 15:19:40,731 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:40,731 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 159, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 175, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:49,473 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - 401 Unauthorized - Response body: {'status': 401, 'data': None, 'message': 'authentication token is required'}
+2026-01-12 15:19:49,473 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:49,473 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 159, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 175, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:49,514 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - 401 Unauthorized - Response body: {'status': 401, 'data': None, 'message': 'authentication token is required'}
+2026-01-12 15:19:49,514 - apps.v1.api.credentials.services.credentials_list_service - ERROR - credentials_list_service - fetch_credentials_list - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:19:49,514 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials list: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 159, in fetch_credentials_list
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/credentials?page=1&size=10&credential_status=issued&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 166, in get_credentials_list
+    credentials_data = await credentials_list_service.fetch_credentials_list(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/credentials_list_service.py", line 175, in fetch_credentials_list
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:28:49,212 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials: 'EveryCREDService' object has no attribute 'get_credentials_list'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 137, in get_credentials_list
+    credentials_response = await everycred_service.get_credentials_list(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EveryCREDService' object has no attribute 'get_credentials_list'
+2026-01-12 15:29:02,527 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials: 'EveryCREDService' object has no attribute 'get_credentials_list'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 137, in get_credentials_list
+    credentials_response = await everycred_service.get_credentials_list(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EveryCREDService' object has no attribute 'get_credentials_list'
+2026-01-12 15:29:04,845 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials: 'EveryCREDService' object has no attribute 'get_credentials_list'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 137, in get_credentials_list
+    credentials_response = await everycred_service.get_credentials_list(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EveryCREDService' object has no attribute 'get_credentials_list'
+2026-01-12 15:29:20,105 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials: 'EveryCREDService' object has no attribute 'get_credentials_list'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 137, in get_credentials_list
+    credentials_response = await everycred_service.get_credentials_list(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EveryCREDService' object has no attribute 'get_credentials_list'
+2026-01-12 15:29:38,515 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials: 'EveryCREDService' object has no attribute 'get_credentials_list'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 137, in get_credentials_list
+    credentials_response = await everycred_service.get_credentials_list(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EveryCREDService' object has no attribute 'get_credentials_list'
+2026-01-12 15:34:13,017 - apps.v1.api.credentials.view - ERROR - view - get_credentials_list - Error fetching credentials: 'EveryCREDService' object has no attribute 'get_credentials_list'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 137, in get_credentials_list
+    credentials_response = await everycred_service.get_credentials_list(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EveryCREDService' object has no attribute 'get_credentials_list'
+2026-01-12 15:43:15,031 - apps.v1.api.credentials.services.everycred_service - ERROR - everycred_service - _make_request - EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:43:15,031 - apps.v1.api.credentials.view - ERROR - view - issue_credential - Error issuing credential: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/everycred_service.py", line 113, in _make_request
+    response.raise_for_status()
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://stg-dcs-api.everycred.com/v1/record?subject_id=17&issuer_id=15'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 58, in issue_credential
+    credential_response = await everycred_service.issue_credential_for_student(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/everycred_service.py", line 348, in issue_credential_for_student
+    record_id = await self.create_record(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/everycred_service.py", line 266, in create_record
+    response = await self._make_request("POST", endpoint, data=payload, params=params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/services/everycred_service.py", line 118, in _make_request
+    raise Exception(f"EveryCRED API error: {e.response.status_code} - {error_detail}")
+Exception: EveryCRED API error: 401 - {"status":401,"data":null,"message":"authentication token is required"}
+2026-01-12 15:45:07,199 - apps.v1.api.credentials.view - ERROR - view - issue_credential - Error issuing credential: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 77, in issue_credential
+    "credentials_unique_id": credential_response.credentials_unique_id,
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/pydantic/main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+2026-01-12 15:45:10,712 - apps.v1.api.credentials.view - ERROR - view - issue_credential - Error issuing credential: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 77, in issue_credential
+    "credentials_unique_id": credential_response.credentials_unique_id,
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/pydantic/main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+2026-01-12 15:45:11,970 - apps.v1.api.credentials.view - ERROR - view - issue_credential - Error issuing credential: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 77, in issue_credential
+    "credentials_unique_id": credential_response.credentials_unique_id,
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/pydantic/main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+2026-01-12 15:45:12,952 - apps.v1.api.credentials.view - ERROR - view - issue_credential - Error issuing credential: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 77, in issue_credential
+    "credentials_unique_id": credential_response.credentials_unique_id,
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/pydantic/main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+2026-01-12 15:45:14,295 - apps.v1.api.credentials.view - ERROR - view - issue_credential - Error issuing credential: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 77, in issue_credential
+    "credentials_unique_id": credential_response.credentials_unique_id,
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/pydantic/main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+2026-01-12 15:45:15,438 - apps.v1.api.credentials.view - ERROR - view - issue_credential - Error issuing credential: 'CredentialResponse' object has no attribute 'credentials_unique_id'
+Traceback (most recent call last):
+  File "/home/shailesh/Desktop/Lms Demo/backend/apps/v1/api/credentials/view.py", line 77, in issue_credential
+    "credentials_unique_id": credential_response.credentials_unique_id,
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shailesh/Desktop/Lms Demo/backend/.venv/lib/python3.12/site-packages/pydantic/main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'CredentialResponse' object has no attribute 'credentials_unique_id'

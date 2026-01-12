@@ -7,8 +7,7 @@ import { CredentialsTable } from "@/components/dashboard/credentials-table"
 import { motion } from "framer-motion"
 import { Users, BookOpen, TrendingUp, Award } from "lucide-react"
 import { useState, useEffect } from "react"
-import { credentialStorage } from "@/lib/credential-storage"
-import { format } from "date-fns"
+import { everycredCredentialsService } from "@/lib/everycred-credentials-service"
 
 // const completedStudents = [
 //   {
@@ -36,6 +35,7 @@ export default function DashboardPage() {
     Array<{ 
       id: string
       credential_id: string
+      credential_unique_id?: string
       student: string
       student_email?: string
       degree: string
@@ -45,47 +45,35 @@ export default function DashboardPage() {
     }>
   >([])
   const [credentialsCount, setCredentialsCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    // Load recently issued credentials
-    const loadCredentials = () => {
-      const recent = credentialStorage.getRecentCredentials(10)
-      const formatted = recent.map((cred) => ({
-        id: cred.id,
-        credential_id: cred.credential_id,
-        student: cred.student_name,
-        student_email: cred.student_email,
-        degree: cred.degree,
-        program: cred.program,
-        date: format(new Date(cred.issued_at), "yyyy-MM-dd"),
-        verification_url: cred.verification_url,
-      }))
-      setIssuedCredentials(formatted)
-      setCredentialsCount(credentialStorage.getTotalCount())
-    }
-
-    loadCredentials()
-
-    // Listen for storage changes (when credentials are issued from other tabs/components)
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "lms_issued_credentials") {
-        loadCredentials()
+    const loadCredentials = async () => {
+      try {
+        setIsLoading(true)
+        setError(null)
+        
+        // Fetch credentials from EveryCRED API
+        const result = await everycredCredentialsService.getCredentialsList(
+          1,    // page
+          10,   // size (limit to 10 for "recent")
+          "issued" // credential_status
+        )
+        
+        setIssuedCredentials(result.credentials)
+        setCredentialsCount(result.total)
+      } catch (err) {
+        console.error("Failed to load credentials:", err)
+        setError(err instanceof Error ? err.message : "Failed to load credentials. Please try again later.")
+        setIssuedCredentials([])
+        setCredentialsCount(0)
+      } finally {
+        setIsLoading(false)
       }
     }
 
-    window.addEventListener("storage", handleStorageChange)
-
-    // Also listen for custom events (same-tab updates)
-    const handleCredentialIssued = () => {
-      loadCredentials()
-    }
-
-    window.addEventListener("credentialIssued", handleCredentialIssued)
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange)
-      window.removeEventListener("credentialIssued", handleCredentialIssued)
-    }
+    loadCredentials()
   }, [])
   return (
     <AppShell>
@@ -136,7 +124,17 @@ export default function DashboardPage() {
           <h2 className="text-lg font-semibold text-foreground">Recently Issued Credentials</h2>
           <p className="text-sm text-muted-foreground mt-1">Detailed listing of credentials issued via EveryCRED</p>
         </div>
-        <CredentialsTable credentials={issuedCredentials} />
+        {isLoading ? (
+          <div className="text-center py-8">
+            <p className="text-muted-foreground">Loading credentials...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-8">
+            <p className="text-destructive">{error}</p>
+          </div>
+        ) : (
+          <CredentialsTable credentials={issuedCredentials} />
+        )}
       </motion.div>
     </AppShell>
   )
