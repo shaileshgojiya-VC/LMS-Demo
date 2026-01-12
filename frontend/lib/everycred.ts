@@ -119,7 +119,7 @@ class EveryCREDService {
 
     return {
       credential_id: credentialId,
-      verification_url: `https://verify.everycred.com/${credentialId}`,
+      verification_url: `https://stg-dcs-verifier-in.everycred.com/${credentialId}`,
       status: "issued",
       issued_at: new Date().toISOString(),
     }

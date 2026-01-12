@@ -24,9 +24,8 @@ interface CredentialsTableProps {
 
 export function CredentialsTable({ credentials }: CredentialsTableProps) {
   const handleVerify = (credential: CredentialItem) => {
-    // TODO: Implement verification logic later
-    // For now, redirect to verification URL if available, otherwise use placeholder
-    const verifyUrl = credential.verification_url || `https://verify.everycred.com/${credential.credential_id}`
+    // Redirect to verification URL if available, otherwise use correct verifier base URL
+    const verifyUrl = credential.verification_url || `https://stg-dcs-verifier-in.everycred.com/${credential.credential_id}`
     window.open(verifyUrl, "_blank", "noopener,noreferrer")
   }
 

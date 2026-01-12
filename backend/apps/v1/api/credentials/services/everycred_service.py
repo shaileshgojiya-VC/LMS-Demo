@@ -160,6 +160,38 @@ class EveryCREDService:
         
         return {"status": "success", "data": {}, "message": "Mock response"}
     
+    def _normalize_date(self, date_str: Optional[str]) -> Optional[str]:
+        """
+        Normalize date string to YYYY-MM-DD format expected by EveryCRED API.
+        
+        Args:
+            date_str: Date string in various formats (ISO, datetime, date, etc.)
+            
+        Returns:
+            Date string in YYYY-MM-DD format or None if invalid/empty
+        """
+        if not date_str or not date_str.strip():
+            return None
+        
+        date_str = date_str.strip()
+        
+        # Handle ISO format: 2025-01-10T10:30:00 or 2025-01-10T10:30:00Z
+        if "T" in date_str:
+            date_str = date_str.split("T")[0]
+        
+        # Handle datetime format: 2025-01-10 10:30:00
+        if " " in date_str:
+            date_str = date_str.split(" ")[0]
+        
+        # Validate YYYY-MM-DD format
+        try:
+            from datetime import datetime
+            datetime.strptime(date_str, "%Y-%m-%d")
+            return date_str
+        except ValueError:
+            logger.warning(f"Invalid date format: {date_str}, skipping")
+            return None
+    
     async def create_record(
         self,
         student_name: str,
@@ -167,9 +199,9 @@ class EveryCREDService:
         degree: str,
         program: str,
         institution: str,
-        completion_date: Optional[str] = None,
-        course_id: Optional[int] = None,
-        enrollment_date: Optional[str] = None,
+        completiondate: Optional[str] = None,
+        courseid: Optional[int] = None,
+        enrollmentdate: Optional[str] = None,
     ) -> int:
         """
         Create a record (student data entry) in EveryCRED.
@@ -180,9 +212,9 @@ class EveryCREDService:
             degree: Degree type (e.g., "Bachelor of Technology")
             program: Program name (e.g., "Computer Science")
             institution: Institution name
-            completion_date: Optional completion date
-            course_id: Optional course ID
-            enrollment_date: Optional enrollment date
+            completiondate: Optional completion date (will be normalized to YYYY-MM-DD)
+            courseid: Optional course ID
+            enrollmentdate: Optional enrollment date (will be normalized to YYYY-MM-DD)
             
         Returns:
             Record ID
@@ -195,16 +227,22 @@ class EveryCREDService:
         subject_fields = {
             "name": student_name,
             "email": student_email,
-            "program": program,
+             "program": program,
         }
         
         # Add optional fields if provided
-        if course_id is not None:
-            subject_fields["course_id"] = course_id
-        if enrollment_date:
-            subject_fields["enrollment_date"] = enrollment_date
-        if completion_date:
-            subject_fields["completion_date"] = completion_date
+        # Field names must match EveryCRED API field names: courseid, enrollmentdate, completiondate
+        # Dates must be in YYYY-MM-DD format (DATE type, not DATETIME)
+        if courseid is not None:
+            subject_fields["courseid"] = courseid
+        
+        normalized_enrollment_date = self._normalize_date(enrollmentdate)
+        if normalized_enrollment_date:
+            subject_fields["enrollmentdate"] = normalized_enrollment_date
+        
+        normalized_completion_date = self._normalize_date(completiondate)
+        if normalized_completion_date:
+            subject_fields["completiondate"] = normalized_completion_date
         
         # Create slug as JSON string
         slug_data = {"subject_fields": subject_fields}
@@ -313,9 +351,9 @@ class EveryCREDService:
             degree=degree,
             program=program,
             institution=institution,
-            completion_date=completion_date,
-            course_id=course_id,
-            enrollment_date=enrollment_date,
+            completiondate=completion_date,
+            courseid=course_id,
+            enrollmentdate=enrollment_date,
         )
         
         # Step 2: Validate record (if needed)
@@ -341,7 +379,7 @@ class EveryCREDService:
             credential_id = f"EC-{int(time.time())}-{random.randint(1000, 9999)}"
             return CredentialResponse(
                 credential_id=credential_id,
-                verification_url=f"https://verify.everycred.com/{credential_id}",
+                verification_url=f"https://stg-dcs-verifier-in.everycred.com/{credential_id}",
                 status="issued",
                 issued_at=issue_date,
                 record_id=record_id,
@@ -353,7 +391,7 @@ class EveryCREDService:
         
         return CredentialResponse(
             credential_id=task_id,  # Use task_id temporarily
-            verification_url=f"https://verify.everycred.com/{task_id}",
+            verification_url=f"https://stg-dcs-verifier-in.everycred.com/{task_id}",
             status="processing",
             issued_at=issue_date,
             record_id=record_id,
