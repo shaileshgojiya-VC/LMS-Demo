@@ -1,7 +1,7 @@
 // Centralized API Client for Backend Integration
 // Handles all API communication with the backend server
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8888/api"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 interface ApiError {
   message: string
@@ -11,7 +11,7 @@ interface ApiError {
 class ApiClient {
   private baseUrl: string
 
-  constructor(baseUrl: string = API_BASE_URL) {
+  constructor(baseUrl: string = API_BASE_URL || '') {
     this.baseUrl = baseUrl
   }
 

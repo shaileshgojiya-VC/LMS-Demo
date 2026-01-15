@@ -15,3 +15,4 @@ USE lms_db;
 -- Add any initial data or schema here if needed
 -- Note: Alembic migrations will handle schema creation
 
+

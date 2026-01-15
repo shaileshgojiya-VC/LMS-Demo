@@ -9,11 +9,13 @@ import { GlassButton } from "@/components/ui/glass-button"
 import { GlassInput } from "@/components/ui/glass-input"
 import { motion } from "framer-motion"
 import { Plus, Search, Filter, Loader2, AlertCircle } from "lucide-react"
-import { useCourses } from "@/lib/hooks/use-api"
+import { useCoursesList } from "@/lib/hooks/use-api"
 import { Course } from "@/lib/api"
 
 export default function CoursesPage() {
-  const { data: courses, loading, error, refetch } = useCourses()
+  const { data: coursesListResponse, loading, error, refetch } = useCoursesList(1, 10, "newest")
+  // Response structure: { status: "success", data: { total, pages, size, list: [...] }, message: "..." }
+  const courses = coursesListResponse?.data?.list || []
   const [isCreateDialogOpen, setIsCreateDialogOpen] = React.useState(false)
 
   if (loading) {
@@ -73,7 +75,7 @@ export default function CoursesPage() {
           icon={<Plus className="h-4 w-4" />}
           onClick={() => setIsCreateDialogOpen(true)}
         >
-          Add Course
+          Create Subject
         </GlassButton>
       </motion.div>
 
@@ -81,7 +83,7 @@ export default function CoursesPage() {
       {courses && courses.length > 0 ? (
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {courses.map((course, index) => (
-            <CourseCard key={course.id} course={course} index={index} onUpdate={refetch} />
+            <CourseCard key={course.id} course={course} index={index} />
         ))}
       </div>
       ) : (

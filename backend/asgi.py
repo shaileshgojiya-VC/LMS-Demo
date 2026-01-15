@@ -69,7 +69,7 @@ if __name__ == "__main__":
     # Development server configuration
     # Use default host and port, can be overridden by environment variables
     host = os.getenv("SERVER_HOST", "0.0.0.0")
-    port = int(os.getenv("SERVER_PORT", "8000"))
+    port = int(os.getenv("SERVER_PORT", "8815"))
 
     uvicorn.run(
         "asgi:application",

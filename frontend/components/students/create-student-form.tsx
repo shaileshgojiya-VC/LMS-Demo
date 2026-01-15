@@ -99,8 +99,8 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
 
             await api.students.create(studentData)
 
-            toast.success("Student created successfully!", {
-                description: `${studentData.name} has been added to your students.`,
+            toast.success("Record created successfully!", {
+                description: `${studentData.name} has been added.`,
             })
 
             // Reset form
@@ -121,7 +121,7 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
                 onSuccess()
             }
         } catch (error: any) {
-            let errorMessage = "Failed to create student. Please try again."
+            let errorMessage = "Failed to create record. Please try again."
 
             if (error?.message) {
                 if (typeof error.message === "string") {
@@ -131,7 +131,7 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
                 }
             }
 
-            toast.error("Failed to create student", {
+            toast.error("Failed to create record", {
                 description: errorMessage,
             })
         } finally {
@@ -159,9 +159,9 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
         <GlassDialog open={open} onOpenChange={handleClose}>
             <GlassDialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
                 <GlassDialogHeader>
-                    <GlassDialogTitle className="text-2xl">Create New Student</GlassDialogTitle>
+                    <GlassDialogTitle className="text-2xl">Create Record</GlassDialogTitle>
                     <GlassDialogDescription>
-                        Fill in the details to create a new student. Name and email are required.
+                        Fill in the details to create a new record. Name and email are required.
                     </GlassDialogDescription>
                 </GlassDialogHeader>
 
@@ -344,7 +344,7 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
                             variant="primary"
                             loading={loading}
                         >
-                            Create Student
+                            Create Record
                         </GlassButton>
                     </GlassDialogFooter>
                 </form>

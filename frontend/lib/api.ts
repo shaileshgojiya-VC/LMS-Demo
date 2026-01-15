@@ -89,6 +89,127 @@ export interface CredentialIssueResponse {
   issued_at: string
 }
 
+// ==================== Subject Types ====================
+
+export interface SubjectField {
+  name: string
+  title: string
+  ftype: "STRING" | "EMAIL" | "FLOAT" | "DATE" | "INTEGER" | "BOOLEAN"
+  is_required?: boolean
+  is_mask?: boolean
+  is_preview?: boolean
+  is_default?: boolean
+  description?: string
+  hint_text?: string
+  sample?: string
+  error_message?: string
+  pattern?: string
+}
+
+export interface CredFieldCreateRequest {
+  name: string
+  title: string
+  ftype: "STRING" | "EMAIL" | "FLOAT" | "DATE" | "INTEGER" | "BOOLEAN"
+  pattern?: string | null
+  value?: string | null
+  hint_text?: string | null
+  description?: string | null
+  sample?: string | null
+  error_message?: string | null
+  is_required?: boolean
+  is_preview?: boolean
+  is_mask?: boolean
+}
+
+export interface BulkCredFieldCreateRequest {
+  fields_list: CredFieldCreateRequest[]
+}
+
+export interface CredFieldResponse {
+  id: number
+  name: string
+  title: string
+  ftype: string
+  pattern?: string | null
+  value?: string | null
+  hint_text?: string | null
+  description?: string | null
+  sample?: string | null
+  error_message?: string | null
+  is_required: boolean
+  is_preview: boolean
+  is_mask: boolean
+  created_at?: string
+  updated_at?: string
+}
+
+export interface FieldEditPolicy {
+  field_key: string
+  is_editable: boolean
+}
+
+export interface SubjectCreateRequest {
+  name: string
+  title: string
+  description?: string
+  logo?: string
+  group_id: number
+  theme_id?: number
+  template_id?: number | null
+  subject_field_ids?: number[]  // Preferred: list of credential field IDs
+  subject_fields?: SubjectField[]  // Legacy: full field definitions
+  field_edit_policies?: FieldEditPolicy[]
+}
+
+export interface Group {
+  id: number
+  name: string
+  user_id?: number
+  issuer_id?: number
+  created_at?: string
+  updated_at?: string
+}
+
+export interface Theme {
+  id: number
+  user_id?: number
+  theme_name: string
+  theme_type: string
+  theme_unique_id: string
+  theme_img_path?: string
+  theme_path?: string
+  is_default?: boolean
+  created_at?: string
+  updated_at?: string
+  deleted_at?: string | null
+}
+
+export interface SubjectResponse {
+  id: number
+  uuid: string
+  service_subject_id?: number
+  user_id?: number
+  template_id?: number | null
+  theme_id: number
+  title: string
+  name: string
+  description?: string
+  logo?: string
+  status_type?: string
+  did?: string
+  profile_link?: string
+  active_at?: string | null
+  inactive_at?: string | null
+  created_at: string
+  updated_at: string
+  templates?: any
+  themes?: Theme
+  groups?: Group[]
+  badges?: any[]
+  subject_fields?: SubjectField[]
+  field_edit_policies?: FieldEditPolicy[]
+}
+
 // ==================== Auth Types ====================
 
 export interface LoginRequest {
@@ -186,6 +307,22 @@ export const api = {
       return response.data
     },
 
+    getList: async (
+      page?: number,
+      size?: number,
+      orderBy?: string,
+      groupId?: number
+    ): Promise<StandardResponse<{ list: Course[]; total: number; pages: number; size: number | null; page: number }>> => {
+      const params = new URLSearchParams()
+      if (page !== undefined) params.append("page", page.toString())
+      if (size !== undefined) params.append("size", size.toString())
+      if (orderBy) params.append("order_by", orderBy)
+      if (groupId !== undefined) params.append("group_id", groupId.toString())
+      const queryString = params.toString()
+      const endpoint = `/v1/course/list${queryString ? `?${queryString}` : ""}`
+      return apiClient.get<StandardResponse<{ list: Course[]; total: number; pages: number; size: number | null; page: number }>>(endpoint)
+    },
+
     getById: async (id: number): Promise<Course> => {
       const response = await apiClient.get<StandardResponse<Course>>(`/v1/course/${id}`)
       return response.data
@@ -226,6 +363,91 @@ export const api = {
       const queryString = params.toString()
       const endpoint = `/v1/credentials/list${queryString ? `?${queryString}` : ""}`
       return apiClient.get<StandardResponse<{ credentials: Credential[]; total: number; page: number; size: number }>>(endpoint)
+    },
+
+    getCourseCredentials: async (
+      course_id: number,
+      course_name: string,
+      credential_status?: string,
+      page?: number,
+      size?: number
+    ): Promise<StandardResponse<{ students: Student[]; total: number; course_id: number; course_name: string }>> => {
+      const params = new URLSearchParams()
+      params.append("course_name", course_name)
+      if (credential_status) params.append("credential_status", credential_status)
+      if (page !== undefined) params.append("page", page.toString())
+      if (size !== undefined) params.append("size", size.toString())
+      const queryString = params.toString()
+      const endpoint = `/v1/credentials/course/${course_id}${queryString ? `?${queryString}` : ""}`
+      return apiClient.get<StandardResponse<{ students: Student[]; total: number; course_id: number; course_name: string }>>(endpoint)
+    },
+
+    createSubject: async (request: SubjectCreateRequest): Promise<SubjectResponse> => {
+      const response = await apiClient.post<StandardResponse<SubjectResponse>>(
+        "/v1/credentials/subjects",
+        request
+      )
+      // Extract data from StandardResponse format
+      if (response && response.data) {
+        return response.data
+      }
+      return response as unknown as SubjectResponse
+    },
+
+    createCredFields: async (request: BulkCredFieldCreateRequest): Promise<StandardResponse<{ fields: any; field_ids: number[] }>> => {
+      return apiClient.post<StandardResponse<{ fields: any; field_ids: number[] }>>(
+        "/v1/credentials/fields",
+        request
+      )
+    },
+
+    // Create a single credential field
+    createSingleField: async (request: CredFieldCreateRequest): Promise<StandardResponse<CredFieldResponse>> => {
+      return apiClient.post<StandardResponse<CredFieldResponse>>(
+        "/v1/credentials/field",
+        request
+      )
+    },
+
+    updateCredField: async (fieldId: number, request: Partial<CredFieldCreateRequest>): Promise<CredFieldResponse> => {
+      const response = await apiClient.put<StandardResponse<CredFieldResponse>>(
+        `/v1/credentials/fields/${fieldId}`,
+        request
+      )
+      if (response && response.data) {
+        return response.data
+      }
+      return response as unknown as CredFieldResponse
+    },
+
+    deleteCredField: async (fieldId: number): Promise<void> => {
+      await apiClient.delete<StandardResponse<null>>(`/v1/credentials/fields/${fieldId}`)
+    },
+
+    listCredFields: async (
+      subject_uuid?: string,
+      search?: string,
+      page?: number,
+      size?: number
+    ): Promise<StandardResponse<{ list: CredFieldResponse[]; total: number; page: number; size: number }>> => {
+      const params = new URLSearchParams()
+      if (subject_uuid) params.append("subject_uuid", subject_uuid)
+      if (search) params.append("search", search)
+      if (page !== undefined) params.append("page", page.toString())
+      if (size !== undefined) params.append("size", size.toString())
+      const queryString = params.toString()
+      const endpoint = `/v1/credentials/fields${queryString ? `?${queryString}` : ""}`
+      return apiClient.get<StandardResponse<{ list: CredFieldResponse[]; total: number; page: number; size: number }>>(endpoint)
+    },
+
+    getGroupFields: async (
+      search?: string
+    ): Promise<StandardResponse<{ list: CredFieldResponse[]; total: number }>> => {
+      const params = new URLSearchParams()
+      if (search) params.append("search", search)
+      const queryString = params.toString()
+      const endpoint = `/v1/credentials/group-fields${queryString ? `?${queryString}` : ""}`
+      return apiClient.get<StandardResponse<{ list: CredFieldResponse[]; total: number }>>(endpoint)
     },
 
     getById: async (id: string): Promise<Credential> => {

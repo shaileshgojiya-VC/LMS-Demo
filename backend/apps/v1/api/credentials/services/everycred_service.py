@@ -148,7 +148,6 @@ class EveryCREDService:
             }
         elif "credentials/issue" in endpoint and method == "POST":
             # Mock issue credential response
-            credential_id = f"EC-{int(time.time())}-{random.randint(1000, 9999)}"
             return {
                 "status": "success",
                 "status_code": 202,
@@ -396,6 +395,87 @@ class EveryCREDService:
             issued_at=issue_date,
             record_id=record_id,
         )
+    
+    async def get_credentials_list(
+        self,
+        page: int = 1,
+        size: int = 10,
+        credential_status: Optional[str] = "issued",
+        issuer_id: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Fetch credentials list from EveryCRED API.
+        
+        Args:
+            page: Page number
+            size: Page size
+            credential_status: Filter by credential status (e.g., "issued")
+            issuer_id: Filter by issuer ID
+            
+        Returns:
+            Response data with credentials list
+        """
+        params: Dict[str, Any] = {
+            "page": page,
+            "size": size,
+            "credential_status": credential_status,
+        }
+        
+        if issuer_id is not None:
+            params["issuer_id"] = issuer_id
+        
+        response = await self._make_request(
+            "GET",
+            "user/credentials",
+            params=params,
+        )
+        return response
+    
+    async def get_subjects_list(
+        self,
+        page: int = 1,
+        size: int = 10,
+        order_by: Optional[str] = "newest",
+        group_id: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Fetch subjects list from EveryCRED staging API.
+        Endpoint: https://stg-dcs-api.everycred.com/v1/subject?order_by=newest&page=1
+        
+        Args:
+            page: Page number
+            size: Page size (optional, API may use default)
+            order_by: Order by field (default: "newest")
+            group_id: Optional group ID filter
+            
+        Returns:
+            Response data with subjects list
+        """
+        params: Dict[str, Any] = {
+            "page": page,
+        }
+        
+        if order_by:
+            params["order_by"] = order_by
+        
+        if size and size != 10:
+            params["size"] = size
+        
+        if group_id is not None:
+            params["group_id"] = group_id
+        
+        # Use subject endpoint for subjects listing
+        # URL pattern: /v1/subject?order_by=newest&page=1
+        # Base URL is: https://stg-dcs-api.everycred.com/v1 (from config)
+        # Full URL: https://stg-dcs-api.everycred.com/v1/subject?order_by=newest&page=1
+        logger.info(f"Fetching subjects list from EveryCRED staging API with params: {params}")
+        response = await self._make_request(
+            "GET",
+            "subject",
+            params=params,
+        )
+        logger.info(f"Received response from EveryCRED subjects API: {type(response)}")
+        return response
     
     async def verify_credential(self, credential_id: str) -> Dict[str, Any]:
         """
