@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Option 1: Simple Single-Column Form</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #f5f5f5;
+      padding: 40px 20px;
+      color: #333;
+    }
+    .wireframe-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .wireframe-title {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #1e3a5f;
+    }
+    .wireframe-description {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+    .card {
+      background: #fff;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 20px;
+      box-shadow: 4px 4px 0 #ddd;
+    }
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #1e3a5f;
+      border-bottom: 2px dashed #333;
+      padding-bottom: 10px;
+    }
+    .form-field {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .field-label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #333;
+    }
+    .required {
+      color: #ef4444;
+      font-weight: bold;
+    }
+    .input-box {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #333;
+      border-radius: 4px;
+      background: #fafafa;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    .select-box {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #333;
+      border-radius: 4px;
+      background: #fafafa;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    .hint-text {
+      font-size: 11px;
+      color: #666;
+      margin-top: 4px;
+      font-style: italic;
+    }
+    .button-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      justify-content: flex-end;
+    }
+    .button {
+      padding: 12px 24px;
+      border: 2px solid #333;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 #ddd;
+    }
+    .button-primary {
+      background: #1e3a5f;
+      color: #fff;
+    }
+    .button-secondary {
+      background: #fff;
+      color: #333;
+    }
+    .badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      z-index: 10;
+      color: white;
+    }
+    .badge-reuse {
+      background: #4CAF50;
+    }
+    .badge-new {
+      background: #FF9800;
+    }
+    .loading-state {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      font-style: italic;
+    }
+    .field-type-indicator {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #e0e0e0;
+      border-radius: 3px;
+      font-size: 11px;
+      margin-left: 8px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="wireframe-container">
+    <h1 class="wireframe-title">Option 1: Simple Single-Column Form</h1>
+    <p class="wireframe-description">
+      <strong>Approach:</strong> Traditional vertical form layout that dynamically renders fields based on selected subject.
+      Fetches field schema from API when subject is selected, then displays all fields in a single scrollable column.
+      <br><br>
+      <strong>Key Features:</strong> Minimal UI, uses existing components, straightforward user flow, clear field type indicators.
+    </p>
+
+    <!-- REUSABLE: GlassCard from frontend/components/ui/glass-card.tsx -->
+    <div style="position: relative;">
+      <span class="badge badge-reuse" title="frontend/components/ui/glass-card.tsx">[REUSE] GlassCard</span>
+      <div class="card">
+        <h2 class="section-title">Add Student Record</h2>
+        
+        <!-- Subject Selection -->
+        <div class="form-field">
+          <label class="field-label">
+            Select Subject <span class="required">*</span>
+          </label>
+          <!-- REUSABLE: Select component pattern from frontend/components/courses/create-attribute-modal.tsx -->
+          <div style="position: relative; display: inline-block; width: 100%;">
+            <span class="badge badge-reuse" title="Pattern from create-attribute-modal.tsx">[REUSE] Select Pattern</span>
+            <select class="select-box">
+              <option value="">Choose a subject...</option>
+              <option value="25" selected>Student ID card</option>
+              <option value="26">Completion Certificate</option>
+              <option value="27">Achievement Badge</option>
+            </select>
+          </div>
+          <div class="hint-text">Selecting a subject will load its specific fields below</div>
+        </div>
+
+        <hr style="border: 1px dashed #ddd; margin: 30px 0;">
+
+        <!-- Dynamic Fields Section -->
+        <!-- NEW COMPONENT: DynamicFieldRenderer (to be created at frontend/components/credentials/dynamic-field-renderer.tsx) -->
+        <div style="position: relative;">
+          <span class="badge badge-new" title="To be created at frontend/components/credentials/dynamic-field-renderer.tsx">[NEW] DynamicFieldRenderer</span>
+          <div>
+            <div class="section-title">Student Information</div>
+            
+            <!-- Example Dynamic Fields (fetched from API) -->
+            
+            <!-- Field 1: STRING type -->
+            <div class="form-field">
+              <label class="field-label">
+                Name <span class="required">*</span>
+                <span class="field-type-indicator">STRING</span>
+              </label>
+              <!-- REUSABLE: GlassInput from frontend/components/ui/glass-input.tsx -->
+              <div style="position: relative; display: inline-block; width: 100%;">
+                <span class="badge badge-reuse" title="frontend/components/ui/glass-input.tsx">[REUSE] GlassInput</span>
+                <input type="text" class="input-box" placeholder="e.g. Shailesh Kumar" value="Shailesh">
+              </div>
+              <div class="hint-text">Enter student's full name</div>
+            </div>
+
+            <!-- Field 2: EMAIL type -->
+            <div class="form-field">
+              <label class="field-label">
+                Email <span class="required">*</span>
+                <span class="field-type-indicator">EMAIL</span>
+              </label>
+              <!-- REUSABLE: GlassInput from frontend/components/ui/glass-input.tsx -->
+              <div style="position: relative; display: inline-block; width: 100%;">
+                <span class="badge badge-reuse" title="frontend/components/ui/glass-input.tsx">[REUSE] GlassInput</span>
+                <input type="email" class="input-box" placeholder="e.g. student@example.com" value="smas@yopmail.com">
+              </div>
+              <div class="hint-text">Student's email address for credential delivery</div>
+            </div>
+
+            <!-- Field 3: STRING type -->
+            <div class="form-field">
+              <label class="field-label">
+                Program <span class="required">*</span>
+                <span class="field-type-indicator">STRING</span>
+              </label>
+              <!-- REUSABLE: GlassInput from frontend/components/ui/glass-input.tsx -->
+              <div style="position: relative; display: inline-block; width: 100%;">
+                <span class="badge badge-reuse" title="frontend/components/ui/glass-input.tsx">[REUSE] GlassInput</span>
+                <input type="text" class="input-box" placeholder="e.g. BTech Computer Science" value="btech">
+              </div>
+            </div>
+
+            <!-- Field 4: DATE type -->
+            <div class="form-field">
+              <label class="field-label">
+                Enrollment Date <span class="required">*</span>
+                <span class="field-type-indicator">DATE</span>
+              </label>
+              <!-- REUSABLE: GlassInput from frontend/components/ui/glass-input.tsx -->
+              <div style="position: relative; display: inline-block; width: 100%;">
+                <span class="badge badge-reuse" title="frontend/components/ui/glass-input.tsx">[REUSE] GlassInput</span>
+                <input type="date" class="input-box" value="2026-01-15">
+              </div>
+            </div>
+
+            <!-- Field 5: STRING type -->
+            <div class="form-field">
+              <label class="field-label">
+                Student Course
+                <span class="field-type-indicator">STRING</span>
+              </label>
+              <!-- REUSABLE: GlassInput from frontend/components/ui/glass-input.tsx -->
+              <div style="position: relative; display: inline-block; width: 100%;">
+                <span class="badge badge-reuse" title="frontend/components/ui/glass-input.tsx">[REUSE] GlassInput</span>
+                <input type="text" class="input-box" placeholder="e.g. Computer Science" value="Btech">
+              </div>
+              <div class="hint-text">Optional field - can be left empty</div>
+            </div>
+
+            <!-- Field 6: INTEGER type example -->
+            <div class="form-field">
+              <label class="field-label">
+                Student Roll Number
+                <span class="field-type-indicator">INTEGER</span>
+              </label>
+              <!-- REUSABLE: GlassInput from frontend/components/ui/glass-input.tsx -->
+              <div style="position: relative; display: inline-block; width: 100%;">
+                <span class="badge badge-reuse" title="frontend/components/ui/glass-input.tsx">[REUSE] GlassInput</span>
+                <input type="number" class="input-box" placeholder="e.g. 12345">
+              </div>
+            </div>
+
+            <!-- Field 7: FLOAT type example -->
+            <div class="form-field">
+              <label class="field-label">
+                CGPA
+                <span class="field-type-indicator">FLOAT</span>
+              </label>
+              <!-- REUSABLE: GlassInput from frontend/components/ui/glass-input.tsx -->
+              <div style="position: relative; display: inline-block; width: 100%;">
+                <span class="badge badge-reuse" title="frontend/components/ui/glass-input.tsx">[REUSE] GlassInput</span>
+                <input type="number" step="0.01" class="input-box" placeholder="e.g. 8.75">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-group">
+          <!-- REUSABLE: GlassButton from frontend/components/ui/glass-button.tsx -->
+          <div style="position: relative; display: inline-block;">
+            <span class="badge badge-reuse" title="frontend/components/ui/glass-button.tsx">[REUSE] GlassButton</span>
+            <button class="button button-secondary">Cancel</button>
+          </div>
+          
+          <!-- REUSABLE: GlassButton from frontend/components/ui/glass-button.tsx -->
+          <div style="position: relative; display: inline-block;">
+            <span class="badge badge-reuse" title="frontend/components/ui/glass-button.tsx">[REUSE] GlassButton</span>
+            <button class="button button-primary">Create Record</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State Example -->
+    <!-- REUSABLE: GlassCard from frontend/components/ui/glass-card.tsx -->
+    <div style="position: relative; margin-top: 40px;">
+      <span class="badge badge-reuse" title="frontend/components/ui/glass-card.tsx">[REUSE] GlassCard</span>
+      <div class="card">
+        <div class="loading-state">
+          <div style="font-size: 40px; margin-bottom: 15px;">⏳</div>
+          <div>Loading field schema for selected subject...</div>
+          <div style="margin-top: 10px; font-size: 12px; color: #999;">Fetching from API: /v1/credentials/subjects/{subject_id}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

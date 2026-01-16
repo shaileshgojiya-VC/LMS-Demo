@@ -26,7 +26,7 @@ const GlassInput = React.forwardRef<HTMLInputElement, GlassInputProps>(
     return (
       <div className="relative">
         <motion.div
-          className="flex items-center gap-3 rounded-2xl px-5 py-3.5 transition-all duration-300"
+          className="flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-3.5 transition-all duration-300 min-h-[44px]"
           style={glassStyle}
           animate={{ scale: isFocused ? 1.01 : 1 }}
           transition={{ type: "spring", stiffness: 350, damping: 30 }}
@@ -36,7 +36,7 @@ const GlassInput = React.forwardRef<HTMLInputElement, GlassInputProps>(
             type={type}
             className={cn(
               "flex-1 bg-transparent outline-none placeholder:text-[#94a3b8]",
-              "text-[#1e3a5f] text-sm",
+              "text-[#1e3a5f] text-sm sm:text-base",
               className,
             )}
             ref={ref}

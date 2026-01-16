@@ -33,7 +33,7 @@ const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
       <motion.div
         ref={ref}
         className={cn(
-          "rounded-3xl p-6 relative overflow-hidden",
+          "rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 relative overflow-hidden",
           interactive && "cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5",
           className,
         )}

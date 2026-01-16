@@ -55,29 +55,29 @@ export function RecentActivity() {
         {activities.map((activity, index) => (
           <motion.div
             key={activity.id}
-            className="p-4 hover:bg-muted/30 transition-colors cursor-pointer"
+            className="p-3 sm:p-4 hover:bg-muted/30 transition-colors cursor-pointer"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
             whileHover={{ x: 4 }}
           >
-            <div className="flex items-start gap-4">
-              <Avatar className="h-10 w-10">
+            <div className="flex items-start gap-3 sm:gap-4">
+              <Avatar className="h-9 w-9 sm:h-10 sm:w-10 shrink-0">
                 <AvatarImage src={`/.jpg?height=40&width=40&query=${activity.user} avatar`} />
                 <AvatarFallback className="bg-primary/10 text-primary text-xs">{activity.avatar}</AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-medium text-foreground">{activity.user}</span>
-                  <GlassBadge variant={activity.type === "credential" ? "success" : "info"}>
+                  <span className="font-medium text-foreground text-sm sm:text-base">{activity.user}</span>
+                  <GlassBadge variant={activity.type === "credential" ? "success" : "info"} className="text-xs">
                     {activity.action}
                   </GlassBadge>
                 </div>
-                <p className="text-sm text-muted-foreground mt-0.5 truncate">{activity.detail}</p>
-                <p className="text-xs text-muted-foreground/70 mt-1">{activity.time}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 truncate">{activity.detail}</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground/70 mt-1">{activity.time}</p>
               </div>
-              <div className="p-2 rounded-lg bg-muted/50">
-                <activity.icon className="h-4 w-4 text-muted-foreground" />
+              <div className="p-1.5 sm:p-2 rounded-lg bg-muted/50 shrink-0">
+                <activity.icon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
               </div>
             </div>
           </motion.div>

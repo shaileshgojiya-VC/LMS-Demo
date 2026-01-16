@@ -82,16 +82,16 @@ export default function ProfilePage() {
           transition={{ delay: 0.1 }}
         >
           <GlassCard interactive={false}>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <Avatar className="h-24 w-24 ring-4 ring-white/50">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+              <Avatar className="h-20 w-20 sm:h-24 sm:w-24 ring-2 sm:ring-4 ring-white/50 shrink-0">
                 <AvatarImage src="/admin-user-avatar.png" />
-                <AvatarFallback className="bg-[#1e3a5f] text-white text-2xl font-medium">
+                <AvatarFallback className="bg-[#1e3a5f] text-white text-xl sm:text-2xl font-medium">
                   {initials}
                 </AvatarFallback>
               </Avatar>
-              <div className="flex-1">
-                <h2 className="text-2xl font-semibold text-foreground mb-2">{user.full_name}</h2>
-                <p className="text-muted-foreground mb-4">{user.email}</p>
+              <div className="flex-1 min-w-0">
+                <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2">{user.full_name}</h2>
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 sm:mb-4 truncate">{user.email}</p>
                 <div className="flex flex-wrap gap-2">
                   <GlassBadge variant={user.is_active ? "success" : "default"}>
                     {user.is_active ? "Active" : "Inactive"}
@@ -113,7 +113,7 @@ export default function ProfilePage() {
         >
           <GlassCard interactive={false}>
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Account Information</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-4">Account Information</h3>
 
               <div className="space-y-4">
                 <div>

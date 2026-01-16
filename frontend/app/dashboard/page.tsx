@@ -47,6 +47,8 @@ export default function DashboardPage() {
   const [credentialsCount, setCredentialsCount] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize] = useState(10)
 
   useEffect(() => {
     const loadCredentials = async () => {
@@ -56,9 +58,9 @@ export default function DashboardPage() {
         
         // Fetch credentials from EveryCRED API
         const result = await everycredCredentialsService.getCredentialsList(
-          1,    // page
-          10,   // size (limit to 10 for "recent")
-          "issued" // credential_status
+          currentPage,    // page
+          pageSize,       // size
+          "issued"        // credential_status
         )
         
         setIssuedCredentials(result.credentials)
@@ -74,7 +76,7 @@ export default function DashboardPage() {
     }
 
     loadCredentials()
-  }, [])
+  }, [currentPage, pageSize])
   return (
     <AppShell>
       <Header title="Dashboard" subtitle="Welcome back! Here's what's happening with your LMS today." />
@@ -115,14 +117,14 @@ export default function DashboardPage() {
 
       {/* Credentials Table Section */}
       <motion.div
-        className="space-y-5"
+        className="space-y-4 sm:space-y-5"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
         <div>
-          <h2 className="text-lg font-semibold text-foreground">Recently Issued Credentials</h2>
-          <p className="text-sm text-muted-foreground mt-1">Detailed listing of credentials issued via EveryCRED</p>
+          <h2 className="text-base sm:text-lg font-semibold text-foreground">Recently Issued Credentials</h2>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1">Detailed listing of credentials issued via EveryCRED</p>
         </div>
         {isLoading ? (
           <div className="text-center py-8">
@@ -133,7 +135,14 @@ export default function DashboardPage() {
             <p className="text-destructive">{error}</p>
           </div>
         ) : (
-          <CredentialsTable credentials={issuedCredentials} />
+          <CredentialsTable 
+            credentials={issuedCredentials}
+            total={credentialsCount}
+            currentPage={currentPage}
+            pageSize={pageSize}
+            onPageChange={setCurrentPage}
+            loading={isLoading}
+          />
         )}
       </motion.div>
     </AppShell>

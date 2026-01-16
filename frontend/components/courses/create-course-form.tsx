@@ -394,7 +394,7 @@ export function CreateCourseForm({ open, onOpenChange, onSuccess }: CreateCourse
       <GlassDialog open={open} onOpenChange={handleClose}>
         <GlassDialogContent className="sm:max-w-[1400px] max-w-[95vw] max-h-[95vh] overflow-hidden flex flex-col">
           <GlassDialogHeader className="flex-shrink-0">
-            <GlassDialogTitle className="text-2xl">Add Subject</GlassDialogTitle>
+            <GlassDialogTitle className="text-xl sm:text-2xl">Add Subject</GlassDialogTitle>
             <GlassDialogDescription>
               Create a new subject in EveryCred. Follow the steps to complete the process.
             </GlassDialogDescription>

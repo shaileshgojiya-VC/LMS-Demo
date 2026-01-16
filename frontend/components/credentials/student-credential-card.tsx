@@ -98,23 +98,23 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
 
   return (
     <GlassCard className="overflow-hidden" interactive={!credential}>
-      <div className="flex items-start gap-4">
-        <Avatar className="h-14 w-14">
+      <div className="flex items-start gap-3 sm:gap-4">
+        <Avatar className="h-12 w-12 sm:h-14 sm:w-14 shrink-0">
           <AvatarImage
             src={student.avatar || `/placeholder.svg?height=56&width=56&query=${student.name} student portrait`}
           />
-          <AvatarFallback className="bg-primary/10 text-primary font-medium">{initials}</AvatarFallback>
+          <AvatarFallback className="bg-primary/10 text-primary font-medium text-xs sm:text-sm">{initials}</AvatarFallback>
         </Avatar>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="font-semibold text-foreground">{student.name}</h3>
-            <GlassBadge variant={student.status === "completed" ? "success" : "default"}>
+            <h3 className="font-semibold text-foreground text-sm sm:text-base">{student.name}</h3>
+            <GlassBadge variant={student.status === "completed" ? "success" : "default"} className="text-xs">
               {student.status === "completed" ? "Completed" : "In Progress"}
             </GlassBadge>
           </div>
-          <p className="text-sm text-muted-foreground mt-0.5">{student.email}</p>
-          <div className="flex flex-wrap gap-4 mt-3 text-sm">
+          <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 truncate">{student.email}</p>
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4 mt-2 sm:mt-3 text-xs sm:text-sm">
             <div>
               <span className="text-muted-foreground">Program:</span>
               <span className="ml-1.5 text-foreground">{student.program}</span>
@@ -134,7 +134,7 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="mt-5 pt-5 border-t border-border/30"
+            className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-border/30"
           >
             <GlassButton
               variant="primary"
@@ -145,7 +145,8 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
               icon={<Award className="h-4 w-4" />}
               disabled={student.status !== "completed"}
             >
-              {isIssuing ? "Issuing Credential..." : "Issue Credential"}
+              <span className="hidden sm:inline">{isIssuing ? "Issuing Credential..." : "Issue Credential"}</span>
+              <span className="sm:hidden">{isIssuing ? "Issuing..." : "Issue"}</span>
             </GlassButton>
           </motion.div>
         ) : (
@@ -153,28 +154,29 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
             key="success"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-5 pt-5 border-t border-border/30"
+            className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-border/30"
           >
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <div className="p-1.5 rounded-full bg-success/20">
-                <CheckCircle className="h-4 w-4 text-success" />
+                <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-success" />
               </div>
-              <span className="text-sm font-medium text-success">Credential Issued Successfully</span>
+              <span className="text-xs sm:text-sm font-medium text-success">Credential Issued Successfully</span>
             </div>
 
-            <div className="glass rounded-xl p-4 space-y-3">
+            <div className="glass rounded-xl p-3 sm:p-4 space-y-2 sm:space-y-3">
               <div className="flex items-center justify-between gap-2">
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-xs text-muted-foreground">Credential ID</p>
-                  <p className="text-sm font-mono text-foreground mt-0.5">{credential.credential_id}</p>
+                  <p className="text-xs sm:text-sm font-mono text-foreground mt-0.5 truncate">{credential.credential_id}</p>
                 </div>
                 <GlassButton
                   variant="ghost"
                   size="sm"
                   onClick={copyCredentialId}
                   icon={copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                  className="shrink-0"
                 >
-                  {copied ? "Copied" : "Copy"}
+                  <span className="hidden sm:inline">{copied ? "Copied" : "Copy"}</span>
                 </GlassButton>
               </div>
 
@@ -185,7 +187,8 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
                 onClick={() => window.open(credential.verification_url, "_blank")}
                 icon={<ExternalLink className="h-3.5 w-3.5" />}
               >
-                View Verification Page
+                <span className="hidden sm:inline">View Verification Page</span>
+                <span className="sm:hidden">View</span>
               </GlassButton>
             </div>
           </motion.div>

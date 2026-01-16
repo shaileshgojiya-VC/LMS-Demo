@@ -159,7 +159,7 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
         <GlassDialog open={open} onOpenChange={handleClose}>
             <GlassDialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
                 <GlassDialogHeader>
-                    <GlassDialogTitle className="text-2xl">Create Record</GlassDialogTitle>
+                    <GlassDialogTitle className="text-xl sm:text-2xl">Create Record</GlassDialogTitle>
                     <GlassDialogDescription>
                         Fill in the details to create a new record. Name and email are required.
                     </GlassDialogDescription>
@@ -213,7 +213,7 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
                         />
                     </motion.div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -298,7 +298,7 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
                         </motion.div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}

@@ -281,7 +281,7 @@ export function CreateAttributeModal({ open, onOpenChange, onSave, editingField 
     <GlassDialog open={open} onOpenChange={handleClose}>
       <GlassDialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <GlassDialogHeader>
-          <GlassDialogTitle className="text-2xl">
+          <GlassDialogTitle className="text-xl sm:text-2xl">
             {editingField ? "Edit Attribute" : "Create New Attribute"}
           </GlassDialogTitle>
           <GlassDialogDescription>

@@ -18,16 +18,16 @@ export default function SettingsPage() {
         {/* EveryCRED Integration */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <GlassCard interactive={false}>
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-primary/10">
-                <Key className="h-5 w-5 text-primary" />
+            <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+              <div className="p-2.5 sm:p-3 rounded-xl bg-primary/10 shrink-0">
+                <Key className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
               </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-semibold text-foreground">EveryCRED API Integration</h3>
-                  <GlassBadge variant="success">Connected</GlassBadge>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="text-sm sm:text-base font-semibold text-foreground">EveryCRED API Integration</h3>
+                  <GlassBadge variant="success" className="text-xs">Connected</GlassBadge>
                 </div>
-                <p className="text-sm text-muted-foreground mt-1 mb-4">
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1 mb-3 sm:mb-4">
                   Configure your EveryCRED API credentials for credential issuance
                 </p>
                 <div className="space-y-4">
@@ -51,13 +51,13 @@ export default function SettingsPage() {
         {/* Institution Settings */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
           <GlassCard interactive={false}>
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-accent/10">
-                <Settings className="h-5 w-5 text-accent" />
+            <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+              <div className="p-2.5 sm:p-3 rounded-xl bg-accent/10 shrink-0">
+                <Settings className="h-4 w-4 sm:h-5 sm:w-5 text-accent" />
               </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-foreground">Institution Settings</h3>
-                <p className="text-sm text-muted-foreground mt-1 mb-4">
+              <div className="flex-1 min-w-0">
+                <h3 className="text-sm sm:text-base font-semibold text-foreground">Institution Settings</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1 mb-3 sm:mb-4">
                   Configure your institution details for credentials
                 </p>
                 <div className="space-y-4">
@@ -72,13 +72,13 @@ export default function SettingsPage() {
         {/* Notifications */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
           <GlassCard interactive={false}>
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-success/10">
-                <Bell className="h-5 w-5 text-success" />
+            <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+              <div className="p-2.5 sm:p-3 rounded-xl bg-success/10 shrink-0">
+                <Bell className="h-4 w-4 sm:h-5 sm:w-5 text-success" />
               </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-foreground">Notifications</h3>
-                <p className="text-sm text-muted-foreground mt-1 mb-4">Configure email and system notifications</p>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-sm sm:text-base font-semibold text-foreground">Notifications</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1 mb-3 sm:mb-4">Configure email and system notifications</p>
                 <div className="space-y-3">
                   {[
                     { label: "Email on credential issuance", enabled: true },
@@ -109,13 +109,13 @@ export default function SettingsPage() {
         {/* Security */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
           <GlassCard interactive={false}>
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-destructive/10">
-                <Shield className="h-5 w-5 text-destructive" />
+            <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+              <div className="p-2.5 sm:p-3 rounded-xl bg-destructive/10 shrink-0">
+                <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-destructive" />
               </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-foreground">Security</h3>
-                <p className="text-sm text-muted-foreground mt-1 mb-4">Security and access control settings</p>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-sm sm:text-base font-semibold text-foreground">Security</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1 mb-3 sm:mb-4">Security and access control settings</p>
                 <div className="space-y-3">
                   {[
                     { label: "Two-factor authentication", enabled: true },

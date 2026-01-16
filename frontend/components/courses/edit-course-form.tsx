@@ -148,7 +148,7 @@ export function EditCourseForm({ open, onOpenChange, course, onSuccess }: EditCo
     <GlassDialog open={open} onOpenChange={handleClose}>
       <GlassDialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <GlassDialogHeader>
-          <GlassDialogTitle className="text-2xl">Edit Course</GlassDialogTitle>
+          <GlassDialogTitle className="text-xl sm:text-2xl">Edit Course</GlassDialogTitle>
           <GlassDialogDescription>
             Update the course details below. Only the course name is required.
           </GlassDialogDescription>
@@ -228,7 +228,7 @@ export function EditCourseForm({ open, onOpenChange, course, onSuccess }: EditCo
             />
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
