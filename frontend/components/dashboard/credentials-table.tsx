@@ -39,12 +39,12 @@ export function CredentialsTable({
 
   const handleVerify = (credential: CredentialItem) => {
     // Use verification_url if available, otherwise construct from credential_unique_id
-    // EveryCRED verifier URL format: https://stg-dcs-verifier-in.everycred.com/{credential_unique_id}
+    // EveryCRED verifier URL format: https://demo-dcs-verifier-us.everycred.com/{credential_unique_id}
     const verifyUrl = 
       credential.verification_url || 
       (credential.credential_unique_id 
-        ? `https://stg-dcs-verifier-in.everycred.com/${credential.credential_unique_id}`
-        : `https://stg-dcs-verifier-in.everycred.com/${credential.credential_id}`)
+        ? `https://demo-dcs-verifier-us.everycred.com/${credential.credential_unique_id}`
+        : `https://demo-dcs-verifier-us.everycred.com/${credential.credential_id}`)
     window.open(verifyUrl, "_blank", "noopener,noreferrer")
   }
 
@@ -53,8 +53,8 @@ export function CredentialsTable({
       <GlassCard interactive={false} className="p-8 rounded-sm">
         <div className="text-center">
           <Award className="h-12 w-12 text-muted-foreground mx-auto mb-4 opacity-50" />
-          <p className="text-muted-foreground">No credentials issued yet</p>
-          <p className="text-sm text-muted-foreground mt-2">Issued credentials will appear here</p>
+          <p className="text-muted-foreground">No certifications issued yet</p>
+          <p className="text-sm text-muted-foreground mt-2">Issued certifications will appear here</p>
         </div>
       </GlassCard>
     )
@@ -67,7 +67,7 @@ export function CredentialsTable({
           <thead>
             <tr className="border-b border-border/30 bg-muted/30">
               <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-3 sm:px-5 py-3">
-                Student
+                Learner
               </th>
               <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-3 sm:px-5 py-3 hidden md:table-cell">
                 Degree
@@ -76,7 +76,7 @@ export function CredentialsTable({
                 Program
               </th>
               <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-3 sm:px-5 py-3 hidden lg:table-cell">
-                Credential ID
+                Certification ID
               </th>
               <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-3 sm:px-5 py-3 hidden sm:table-cell">
                 Issue Date
@@ -165,7 +165,7 @@ export function CredentialsTable({
       {total > 0 && totalPages > 1 && (
         <div className="p-4 sm:p-5 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
           <div className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
-            Showing {((currentPage - 1) * pageSize) + 1}-{Math.min(currentPage * pageSize, total)} of {total} credentials
+            Showing {((currentPage - 1) * pageSize) + 1}-{Math.min(currentPage * pageSize, total)} of {total} certifications
           </div>
           <div className="flex items-center gap-1 sm:gap-2 flex-wrap justify-center">
             <GlassButton

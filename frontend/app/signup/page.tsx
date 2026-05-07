@@ -140,7 +140,7 @@ export default function SignupPage() {
               <GraduationCap className="h-8 w-8 text-primary" />
             </div>
             <h1 className="text-2xl font-semibold text-foreground mb-2">Create Account</h1>
-            <p className="text-sm text-muted-foreground">Sign up to get started with EveryCRED LMS</p>
+            <p className="text-sm text-muted-foreground">Sign up to get started with LMS RMS</p>
           </motion.div>
 
           {/* Form */}

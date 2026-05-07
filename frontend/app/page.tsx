@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
-import { GraduationCap, LogIn, UserPlus, ArrowRight } from "lucide-react"
+import { GraduationCap, LogIn, UserPlus } from "lucide-react"
 import { GlassCard } from "@/components/ui/glass-card"
 import { GlassButton } from "@/components/ui/glass-button"
 
@@ -59,7 +59,7 @@ export default function WelcomePage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            Welcome to University LMS
+            Welcome to LMS RMS
           </motion.h1>
 
           <motion.p
@@ -68,7 +68,7 @@ export default function WelcomePage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            Manage your learning journey, track progress, and earn verifiable credentials
+            Manage training journeys, track compliance progress, and issue verifiable certifications
           </motion.p>
         </motion.div>
 
@@ -101,11 +101,11 @@ export default function WelcomePage() {
                     whileTap={{ scale: 0.98 }}
                   >
                     <GlassButton
-                      onClick={() => router.push("/login")}
+                      onClick={() => router.push("/dashboard")}
                       className="w-full h-14 bg-gradient-to-br from-[#1e3a5f] to-[#2d4a6f] text-white hover:from-[#2d4a6f] hover:to-[#1e3a5f] transition-all"
                     >
                       <LogIn className="mr-2 h-5 w-5" />
-                      Login
+                      Continue to Dashboard
                     </GlassButton>
                   </motion.div>
 
@@ -134,7 +134,7 @@ export default function WelcomePage() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
-          <p>© 2024 University LMS. All rights reserved.</p>
+          <p>© 2024 LMS RMS. All rights reserved.</p>
         </motion.div>
       </motion.div>
     </div>

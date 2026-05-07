@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/sonner"
+import { Providers } from "./providers"
 import "./globals.css"
 
 const inter = Inter({
@@ -11,8 +12,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "EveryCRED LMS | University Credential Management",
-  description: "Modern Learning Management System with seamless credential issuance powered by EveryCRED",
+  title: "LMS RMS | Certification & Records Management",
+  description: "Modern LMS RMS platform with seamless certification issuance powered by EveryCRED",
   generator: "v0.app",
  
 }
@@ -34,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        {children}
+        <Providers>{children}</Providers>
         <Toaster position="top-right" richColors closeButton />
         <Analytics />
       </body>

@@ -69,11 +69,11 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
       })
       
       onCredentialIssued?.(student, data)
-      toast.success("Credential issued successfully!", {
-        description: `Credential ID: ${data.credential_id}`,
+      toast.success("Certification issued successfully!", {
+        description: `Certification ID: ${data.credential_id}`,
       })
     } catch (error: any) {
-      toast.error("Failed to issue credential", {
+      toast.error("Failed to issue certification", {
         description: error?.message || "Please try again later.",
       })
     } finally {
@@ -86,7 +86,7 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
       navigator.clipboard.writeText(credential.credential_id)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-      toast.success("Credential ID copied to clipboard")
+      toast.success("Certification ID copied to clipboard")
     }
   }
 
@@ -145,7 +145,7 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
               icon={<Award className="h-4 w-4" />}
               disabled={student.status !== "completed"}
             >
-              <span className="hidden sm:inline">{isIssuing ? "Issuing Credential..." : "Issue Credential"}</span>
+              <span className="hidden sm:inline">{isIssuing ? "Issuing Certification..." : "Issue Certification"}</span>
               <span className="sm:hidden">{isIssuing ? "Issuing..." : "Issue"}</span>
             </GlassButton>
           </motion.div>
@@ -160,13 +160,13 @@ export function StudentCredentialCard({ student, onCredentialIssued }: StudentCr
               <div className="p-1.5 rounded-full bg-success/20">
                 <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-success" />
               </div>
-              <span className="text-xs sm:text-sm font-medium text-success">Credential Issued Successfully</span>
+              <span className="text-xs sm:text-sm font-medium text-success">Certification Issued Successfully</span>
             </div>
 
             <div className="glass rounded-xl p-3 sm:p-4 space-y-2 sm:space-y-3">
               <div className="flex items-center justify-between gap-2">
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs text-muted-foreground">Credential ID</p>
+                  <p className="text-xs text-muted-foreground">Certification ID</p>
                   <p className="text-xs sm:text-sm font-mono text-foreground mt-0.5 truncate">{credential.credential_id}</p>
                 </div>
                 <GlassButton

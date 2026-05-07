@@ -8,10 +8,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 const activities = [
   {
     id: 1,
-    type: "credential",
+    type: "certification",
     user: "Sarah Johnson",
     avatar: "SJ",
-    action: "Credential issued",
+    action: "Certification issued",
     detail: "Bachelor of Technology",
     time: "2 minutes ago",
     icon: Award,
@@ -21,7 +21,7 @@ const activities = [
     type: "enrollment",
     user: "Michael Chen",
     avatar: "MC",
-    action: "Enrolled in course",
+    action: "Enrolled in training program",
     detail: "Advanced Data Science",
     time: "15 minutes ago",
     icon: BookOpen,
@@ -31,7 +31,7 @@ const activities = [
     type: "registration",
     user: "Emily Davis",
     avatar: "ED",
-    action: "New student registered",
+    action: "New learner registered",
     detail: "Computer Science",
     time: "1 hour ago",
     icon: UserPlus,
@@ -41,7 +41,7 @@ const activities = [
     type: "completion",
     user: "James Wilson",
     avatar: "JW",
-    action: "Course completed",
+    action: "Training program completed",
     detail: "Machine Learning Fundamentals",
     time: "2 hours ago",
     icon: CheckCircle,
@@ -69,7 +69,7 @@ export function RecentActivity() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="font-medium text-foreground text-sm sm:text-base">{activity.user}</span>
-                  <GlassBadge variant={activity.type === "credential" ? "success" : "info"} className="text-xs">
+                  <GlassBadge variant={activity.type === "certification" ? "success" : "info"} className="text-xs">
                     {activity.action}
                   </GlassBadge>
                 </div>

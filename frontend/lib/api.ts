@@ -501,11 +501,26 @@ export const api = {
   // Authentication
   auth: {
     login: async (credentials: LoginRequest): Promise<AuthResponse> => {
-      const response = await apiClient.post<StandardResponse<AuthResponse>>(
-        "/v1/auth/login",
-        credentials
-      )
-      return response.data
+      // Use Next.js API route which proxies to the DCS login endpoint
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      })
+
+      const data = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        const message =
+          (data && typeof data === "object" && "message" in data && (data as any).message) ||
+          "Login failed"
+        throw new Error(message)
+      }
+
+      // Cast to AuthResponse – adjust here if DCS returns a different shape
+      return data as AuthResponse
     },
 
     register: async (userData: RegisterRequest): Promise<AuthResponse> => {

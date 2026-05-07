@@ -33,9 +33,9 @@ const GlassBadge = React.forwardRef<HTMLSpanElement, GlassBadgeProps>(
         border: "1px solid rgba(239, 68, 68, 0.2)",
       },
       info: {
-        background: "rgba(30, 58, 95, 0.1)",
-        color: "#1e3a5f",
-        border: "1px solid rgba(30, 58, 95, 0.2)",
+        background: "oklch(0.4 0.1 250 / 0.1)",
+        color: "var(--primary)",
+        border: "1px solid oklch(0.4 0.1 250 / 0.2)",
       },
     }
 
@@ -45,7 +45,7 @@ const GlassBadge = React.forwardRef<HTMLSpanElement, GlassBadgeProps>(
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className={cn(
-          "inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-xl",
+          "inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-[var(--radius)]",
           "backdrop-blur-xl shadow-sm",
           className,
         )}

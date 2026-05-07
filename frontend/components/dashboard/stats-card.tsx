@@ -19,7 +19,7 @@ export function StatsCard({ title, value, change, icon, trend = "neutral", delay
   const trendColors = {
     up: "text-green-600",
     down: "text-red-500",
-    neutral: "text-[#64748b]",
+    neutral: "text-muted-foreground",
   }
 
   const TrendIcon = trend === "up" ? TrendingUp : trend === "down" ? TrendingDown : Minus
@@ -34,9 +34,9 @@ export function StatsCard({ title, value, change, icon, trend = "neutral", delay
         <div className="flex items-start justify-between h-full gap-3 sm:gap-4">
           <div className="flex-1 flex flex-col justify-between min-h-[100px] sm:min-h-[110px]">
             <div className="space-y-2 sm:space-y-2.5">
-              <p className="text-xs sm:text-sm text-[#64748b]">{title}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground">{title}</p>
               <motion.p
-                className="text-2xl sm:text-3xl font-semibold text-[#1e3a5f] tracking-tight"
+                className="text-2xl sm:text-3xl font-semibold text-foreground tracking-tight"
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: delay + 0.1, type: "spring", stiffness: 300 }}
@@ -52,14 +52,14 @@ export function StatsCard({ title, value, change, icon, trend = "neutral", delay
                     {change > 0 ? "+" : ""}
                     {change}%
                   </span>
-                  <span className="text-[#94a3b8] hidden sm:inline">vs last month</span>
-                  <span className="text-[#94a3b8] sm:hidden">vs last mo.</span>
+                  <span className="text-muted-foreground/70 hidden sm:inline">vs last month</span>
+                  <span className="text-muted-foreground/70 sm:hidden">vs last mo.</span>
                 </>
               )}
             </div>
           </div>
           <div
-            className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl text-[#1e3a5f] shrink-0"
+            className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl text-primary shrink-0"
             style={{
               background: "rgba(255, 255, 255, 0.6)",
               backdropFilter: "blur(12px)",

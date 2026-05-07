@@ -283,12 +283,12 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
     setDeletingId(student.id)
     try {
       await api.students.delete(student.id)
-      toast.success("Student deleted successfully!", {
+      toast.success("Learner deleted successfully!", {
         description: `${student.name} has been removed.`,
       })
       refetch()
     } catch (error: any) {
-      let errorMessage = "Failed to delete student. Please try again."
+      let errorMessage = "Failed to delete learner. Please try again."
       if (error?.message) {
         if (typeof error.message === "string") {
           errorMessage = error.message
@@ -296,7 +296,7 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
           errorMessage = JSON.stringify(error.message)
         }
       }
-      toast.error("Failed to delete student", {
+      toast.error("Failed to delete learner", {
         description: errorMessage,
       })
     } finally {
@@ -350,14 +350,14 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
         issued_at: data.issued_at || new Date().toISOString(),
       })
 
-      toast.success("Credential issued successfully!", {
-        description: `Credential ID: ${data.credential_id}`,
+      toast.success("Certification issued successfully!", {
+        description: `Certification ID: ${data.credential_id}`,
       })
 
       // Dispatch custom event for other components
       window.dispatchEvent(new Event("credentialIssued"))
     } catch (error: any) {
-      toast.error("Failed to issue credential", {
+      toast.error("Failed to issue certification", {
         description: error?.message || "Please try again later.",
       })
     } finally {
@@ -369,11 +369,11 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
     return (
       <GlassCard interactive={false} className="p-8 rounded-sm">
         <div className="text-center">
-          <p className="text-red-500 mb-4">Error loading students: {error}</p>
+          <p className="text-red-500 mb-4">Error loading learners: {error}</p>
           {courseId && courseName && (
             <div className="text-sm text-muted-foreground mb-4">
-              <p>Course ID: {courseId}</p>
-              <p>Course Name: {courseName}</p>
+              <p>Training Program ID: {courseId}</p>
+              <p>Training Program Name: {courseName}</p>
               <p>API Endpoint: /v1/credentials/course/{courseId}?course_name={encodeURIComponent(courseName)}&credential_status=draft</p>
             </div>
           )}
@@ -393,7 +393,7 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
           <div className="flex-1">
             <div className="flex items-center gap-2 flex-wrap">
               <h3 className="font-semibold text-foreground text-base sm:text-lg">
-                {courseName ? `Students in ${courseName}` : "All Students"}
+                {courseName ? `Learners in ${courseName}` : "All Learners"}
               </h3>
               {courseName && (
                 <GlassButton
@@ -408,13 +408,13 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
               )}
             </div>
             <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
-              {loading ? "Loading..." : `${students?.length || 0} ${courseName ? "enrolled" : "total"} students`}
+              {loading ? "Loading..." : `${students?.length || 0} ${courseName ? "enrolled" : "total"} learners`}
             </p>
           </div>
           <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
             <div className="flex-1 sm:w-64">
               <GlassInput
-                placeholder="Search students..."
+                placeholder="Search learners..."
                 icon={<Search className="h-4 w-4" />}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -446,7 +446,7 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
         {loading && (
           <div className="flex items-center justify-center py-12">
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-            <span className="ml-2 text-muted-foreground">Loading students...</span>
+            <span className="ml-2 text-muted-foreground">Loading learners...</span>
           </div>
         )}
 
@@ -455,8 +455,8 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
           <div className="flex flex-col items-center justify-center py-12 px-4">
             <p className="text-muted-foreground mb-4">
               {searchQuery || courseId
-                ? "No students found matching your filters."
-                : "No students found. Add your first student to get started."}
+                ? "No learners found matching your filters."
+                : "No learners found. Add your first learner to get started."}
             </p>
             {!searchQuery && !courseId && (
               <GlassButton variant="primary" icon={<UserPlus className="h-4 w-4" />} onClick={handleAddNewStudent}>
@@ -505,7 +505,7 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
               <thead>
                 <tr className="border-b border-border/30 bg-muted/30">
                   <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-3 sm:px-5 py-3">
-                    Student
+                    Learner
                   </th>
                   <th className="text-left text-xs font-medium text-muted-foreground uppercase tracking-wider px-3 sm:px-5 py-3 hidden md:table-cell">
                     Program
@@ -593,7 +593,7 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
                             loading={issuingCredentialId === student.id}
                             icon={<Award className="h-4 w-4" />}
                           >
-                            Issue Credentials
+                            Issue Certifications
                           </GlassButton>
                           <GlassButton
                             variant="secondary"
@@ -626,7 +626,7 @@ export function StudentsTable({ courseId, courseName }: StudentsTableProps) {
         {courseId && courseName && total > 0 && totalPages > 1 && (
           <div className="p-4 sm:p-5 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
             <div className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
-              Showing {((currentPage - 1) * pageSize) + 1}-{Math.min(currentPage * pageSize, total)} of {total} students
+              Showing {((currentPage - 1) * pageSize) + 1}-{Math.min(currentPage * pageSize, total)} of {total} learners
             </div>
             <div className="flex items-center gap-1 sm:gap-2 flex-wrap justify-center">
               <GlassButton

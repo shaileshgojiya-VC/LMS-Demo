@@ -43,7 +43,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         className="fixed top-4 left-4 z-30 md:hidden p-3 rounded-xl bg-white/50 backdrop-blur-[40px] border border-white/25 shadow-lg hover:bg-white/70 transition-colors"
         aria-label="Open menu"
       >
-        <Menu className="h-5 w-5 text-[#1e3a5f]" />
+        <Menu className="h-5 w-5 text-foreground" />
       </button>
 
       {/* Fixed sidebar */}

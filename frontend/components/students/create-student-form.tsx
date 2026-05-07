@@ -49,9 +49,9 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
         const newErrors: typeof errors = {}
 
         if (!formData.name.trim()) {
-            newErrors.name = "Student name is required"
+            newErrors.name = "Learner name is required"
         } else if (formData.name.trim().length < 2) {
-            newErrors.name = "Student name must be at least 2 characters"
+            newErrors.name = "Learner name must be at least 2 characters"
         }
 
         if (!formData.email.trim()) {
@@ -61,7 +61,7 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
         }
 
         if (formData.course_id && (isNaN(Number(formData.course_id)) || Number(formData.course_id) <= 0)) {
-            newErrors.course_id = "Please select a valid course"
+            newErrors.course_id = "Please select a valid training program"
         }
 
         setErrors(newErrors)
@@ -173,7 +173,7 @@ export function CreateStudentForm({ open, onOpenChange, onSuccess }: CreateStude
                     >
                         <GlassInput
                             type="text"
-                            placeholder="Student name *"
+                            placeholder="Learner name *"
                             icon={<User className="h-4 w-4" />}
                             value={formData.name}
                             onChange={handleChange("name")}

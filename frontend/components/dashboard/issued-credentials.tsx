@@ -9,6 +9,7 @@ import { ShieldCheck, ExternalLink } from "lucide-react"
 interface IssuedCredential {
   id: string
   credential_id: string
+  credential_unique_id?: string
   student: string
   degree: string
   date: string
@@ -21,8 +22,12 @@ interface IssuedCredentialsProps {
 
 export function IssuedCredentials({ credentials }: IssuedCredentialsProps) {
   const handleVerify = (credential: IssuedCredential) => {
-    // Redirect to verification URL if available, otherwise use correct verifier base URL
-    const verifyUrl = credential.verification_url || `https://stg-dcs-verifier-in.everycred.com/${credential.credential_id}`
+    // Use verification_url if available, otherwise construct from credential_unique_id (preferred)
+    const verifyUrl =
+      credential.verification_url ||
+      (credential.credential_unique_id
+        ? `https://demo-dcs-verifier-us.everycred.com/${credential.credential_unique_id}`
+        : `https://demo-dcs-verifier-us.everycred.com/${credential.credential_id}`)
     window.open(verifyUrl, "_blank", "noopener,noreferrer")
   }
 
@@ -30,7 +35,7 @@ export function IssuedCredentials({ credentials }: IssuedCredentialsProps) {
     return (
       <GlassCard interactive={false} className="p-8">
         <div className="text-center">
-          <p className="text-muted-foreground">No credentials issued yet</p>
+          <p className="text-muted-foreground">No certifications issued yet</p>
         </div>
       </GlassCard>
     )

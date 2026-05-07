@@ -26,7 +26,7 @@ interface CreateCourseFormProps {
 type Step = 1 | 2 | 3
 
 const STEPS = [
-  { id: 1, title: "Info & Credential Details", description: "Set up basic information" },
+  { id: 1, title: "Info & Certification Details", description: "Set up basic information" },
   { id: 2, title: "Attributes", description: "Configure subject attributes" },
   { id: 3, title: "Review", description: "Review and submit" },
 ] as const
@@ -245,9 +245,9 @@ export function CreateCourseForm({ open, onOpenChange, onSuccess }: CreateCourse
     }
 
     if (!formData.title.trim()) {
-      newErrors.title = "Credential title is required"
+      newErrors.title = "Certification title is required"
     } else if (formData.title.length > 100) {
-      newErrors.title = "Credential title must be 100 characters or less"
+      newErrors.title = "Certification title must be 100 characters or less"
     }
 
     if (!formData.description || !formData.description.trim()) {
@@ -307,7 +307,7 @@ export function CreateCourseForm({ open, onOpenChange, onSuccess }: CreateCourse
         .filter(id => id !== undefined && id !== null && id > 0) as number[]
 
       if (finalFieldIds.length === 0) {
-        throw new Error("No credential fields selected. Please create and select at least one field.")
+        throw new Error("No certification fields selected. Please create and select at least one field.")
       }
 
       console.log("Creating subject with field IDs:", finalFieldIds)
@@ -445,7 +445,7 @@ export function CreateCourseForm({ open, onOpenChange, onSuccess }: CreateCourse
             {/* Main Content Area */}
             <div className="flex-1 overflow-y-auto px-6">
               <form onSubmit={handleSubmit} className="py-4">
-                {/* Step 1: Info & Credential Details */}
+                {/* Step 1: Info & Certification Details */}
                 {currentStep === 1 && (
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}
@@ -471,7 +471,7 @@ export function CreateCourseForm({ open, onOpenChange, onSuccess }: CreateCourse
                             maxLength={100}
                           />
                           <div className="flex items-center justify-between mt-1">
-                            <span className="text-xs text-muted-foreground ml-2">e.g. Award credentials</span>
+                            <span className="text-xs text-muted-foreground ml-2">e.g. Award certifications</span>
                             <span className="text-xs text-muted-foreground">{formData.name.length}/100</span>
                           </div>
                         </div>
@@ -514,14 +514,14 @@ export function CreateCourseForm({ open, onOpenChange, onSuccess }: CreateCourse
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-2">Credential Information</h3>
-                      <p className="text-sm text-muted-foreground mb-4">Provide a detailed description of your credential.</p>
+                      <h3 className="text-lg font-semibold text-foreground mb-2">Certification Information</h3>
+                      <p className="text-sm text-muted-foreground mb-4">Provide a detailed description of your certification.</p>
                       
                       <div className="space-y-4">
                         <div>
                           <GlassInput
                             type="text"
-                            placeholder="Credential Title *"
+                            placeholder="Certification Title *"
                             value={formData.title}
                             onChange={(e) => {
                               setFormData(prev => ({ ...prev, title: e.target.value }))
@@ -539,7 +539,7 @@ export function CreateCourseForm({ open, onOpenChange, onSuccess }: CreateCourse
 
                         <div>
                           <textarea
-                            placeholder="Enter a brief description of the credential *"
+                            placeholder="Enter a brief description of the certification *"
                             value={formData.description}
                             onChange={(e) => {
                               setFormData(prev => ({ ...prev, description: e.target.value }))
@@ -836,12 +836,12 @@ export function CreateCourseForm({ open, onOpenChange, onSuccess }: CreateCourse
                           </div>
                         </div>
 
-                        {/* Credential Information Review */}
+                        {/* Certification Information Review */}
                         <div className="bg-muted/30 rounded-lg p-4">
-                          <h4 className="text-sm font-semibold text-foreground mb-3">Credential Information</h4>
+                          <h4 className="text-sm font-semibold text-foreground mb-3">Certification Information</h4>
                           <div className="space-y-2 text-sm">
                             <div>
-                              <span className="text-muted-foreground">Credential Title:</span>{" "}
+                              <span className="text-muted-foreground">Certification Title:</span>{" "}
                               <span className="text-foreground font-medium">{formData.title}</span>
                             </div>
                             <div>

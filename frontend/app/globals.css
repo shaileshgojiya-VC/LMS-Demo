@@ -52,8 +52,8 @@
   --chart-4: oklch(0.7 0.15 85);
   --chart-5: oklch(0.6 0.2 320);
 
-  /* Larger radius for pill-like feel */
-  --radius: 1.25rem;
+  /* Consistent UI radius (8px) */
+  --radius: 0.5rem;
 
   /* Ultra-soft sidebar */
   --sidebar: oklch(0.995 0 0 / 0.65);

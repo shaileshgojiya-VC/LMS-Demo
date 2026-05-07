@@ -35,7 +35,8 @@ export interface CreateRecordPayload {
  */
 export async function createRecord(
     subjectId: number,
-    subjectFields: Record<string, any>
+    subjectFields: Record<string, any>,
+    issuerId?: number
 ): Promise<RecordResponse> {
     const config = getEveryCREDConfig()
 
@@ -70,16 +71,29 @@ export async function createRecord(
         slug: slug,
     }
 
-    // Build URL with query parameters
-    const issuerId = 15 // Static as per requirements
-    const url = `${config.apiUrl}/record?subject_id=${subjectId}&issuer_id=${issuerId}`
+    const baseUrl = "https://demo-dcs-api-us.everycred.com/v1"
+    const effectiveIssuerId = issuerId ?? config.issuerId ?? 15
+    const url = `${baseUrl}/record?subject_id=${subjectId}&issuer_id=${effectiveIssuerId}`
+
+    // Prefer login token; fallback to env token for dev.
+    let token = config.apiToken
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem("lms_auth_tokens")
+        if (stored) {
+          const tokens = JSON.parse(stored)
+          if (tokens?.access_token) token = String(tokens.access_token)
+        }
+      } catch {}
+    }
 
     try {
         const response = await fetch(url, {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${config.apiToken}`,
+                "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json",
+                accept: "application/json",
             },
             body: JSON.stringify(payload),
         })

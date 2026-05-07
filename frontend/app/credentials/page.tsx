@@ -48,7 +48,7 @@ const issuedCredentials = [
 export default function CredentialsPage() {
   return (
     <AppShell>
-      <Header title="Credentials" subtitle="Issue and manage academic credentials via EveryCRED" />
+      <Header title="Certifications" subtitle="Issue and manage certifications via EveryCRED" />
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
@@ -81,9 +81,9 @@ export default function CredentialsPage() {
           transition={{ delay: 0.4 }}
         >
           <div>
-            <h2 className="text-lg font-semibold text-foreground">Pending Credential Issuance</h2>
+            <h2 className="text-lg font-semibold text-foreground">Pending Certification Issuance</h2>
             <p className="text-sm text-muted-foreground mt-1">
-              Click "Issue Degree Credential" to send credentials to EveryCRED
+              Click "Issue Degree Certification" to send certifications to EveryCRED
             </p>
           </div>
 
@@ -110,7 +110,7 @@ export default function CredentialsPage() {
         >
           <div>
             <h2 className="text-lg font-semibold text-foreground">Recently Issued</h2>
-            <p className="text-sm text-muted-foreground mt-1">Latest credentials issued</p>
+            <p className="text-sm text-muted-foreground mt-1">Latest certifications issued</p>
           </div>
           <GlassCard interactive={false} className="p-0 overflow-hidden">
             <div className="divide-y divide-border/30">

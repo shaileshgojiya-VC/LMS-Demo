@@ -9,17 +9,22 @@ export interface EveryCREDCredential {
   credential_unique_id?: string
   uuid?: string
   candidate_name?: string
+  candidate_email?: string
+  email?: string
+  name?: string
   student?: string
   student_name?: string
   student_email?: string
   degree?: string
   program?: string
+  subject_name?: string
   date?: string
   issue_date?: string
   created_at?: string
   issued_at?: string
   verification_url?: string
   status?: string
+  record_slug?: Record<string, unknown>
   subject_fields?: {
     name?: string
     email?: string
@@ -68,6 +73,28 @@ export interface CredentialsListResult {
 class EveryCREDCredentialsService {
   private config: EveryCREDConfig | null = null
 
+  private getAccessToken(): string {
+    if (typeof window === "undefined") {
+      throw new Error("Authentication is only available in the browser.")
+    }
+
+    const stored = localStorage.getItem("lms_auth_tokens")
+    if (!stored) {
+      throw new Error("No login token found. Please login again.")
+    }
+
+    try {
+      const tokens = JSON.parse(stored)
+      const token = tokens?.access_token
+      if (!token) {
+        throw new Error("Access token is missing. Please login again.")
+      }
+      return String(token)
+    } catch {
+      throw new Error("Invalid login token. Please login again.")
+    }
+  }
+
   /**
    * Get configuration, re-reading from environment variables each time
    * to ensure we have the latest values (important for Next.js hot reload)
@@ -94,59 +121,39 @@ class EveryCREDCredentialsService {
     credentialStatus: string = "issued",
     issuerId?: number
   ): Promise<CredentialsListResult> {
-    // Re-read config to ensure we have latest env vars
     const config = getEveryCREDConfig()
     
     if (!isEveryCREDConfigured(config)) {
       throw new Error("EveryCRED is not properly configured. Please check your environment variables.")
     }
 
-    // Validate API token is present
-    if (!config.apiToken || config.apiToken.trim() === "") {
-      console.error("Config check:", {
-        hasToken: !!config.apiToken,
-        tokenLength: config.apiToken?.length || 0,
-        envVar: process.env.NEXT_PUBLIC_EVERYCRED_API_TOKEN ? "exists" : "missing",
-      })
-      throw new Error("EVERYCRED_API_TOKEN is required but not configured or is empty. Please check your .env.local file and restart the Next.js server.")
-    }
+    const accessToken = this.getAccessToken()
 
-    const effectiveIssuerId = issuerId ?? config.issuerId
-    if (!effectiveIssuerId) {
-      throw new Error("EVERYCRED_ISSUER_ID is required but not configured.")
-    }
-
-    // Build query parameters
+    // Build query parameters (issuer is inferred from activated issuer profile)
     const params = new URLSearchParams({
       page: page.toString(),
       size: size.toString(),
       credential_status: credentialStatus,
-      issuer_id: effectiveIssuerId.toString(),
     })
 
-    // Construct full URL
-    const url = `${config.apiUrl}/credentials?${params.toString()}`
+    // If an issuerId override is explicitly provided, include it.
+    if (issuerId !== undefined && issuerId !== null) {
+      params.set("issuer_id", String(issuerId))
+    }
+
+    // Credentials API lives under demo-dcs-api-us host.
+    const baseUrl = "https://demo-dcs-api-us.everycred.com/v1"
+    const url = `${baseUrl}/credentials?${params.toString()}`
 
     // Prepare headers
     const headers: HeadersInit = {
       "Content-Type": "application/json",
+      accept: "application/json",
     }
 
-    // Add Authorization header with Bearer token
-    const authToken = config.apiToken.trim()
-    if (!authToken) {
-      throw new Error("API token is empty. Please check NEXT_PUBLIC_EVERYCRED_API_TOKEN in your .env.local file.")
-    }
-    headers["Authorization"] = `Bearer ${authToken}`
+    headers["Authorization"] = `Bearer ${accessToken}`
 
     try {
-      console.log("EveryCRED API Request:", {
-        url,
-        hasToken: !!authToken,
-        tokenLength: authToken.length,
-        tokenPrefix: authToken.substring(0, 20) + "...",
-      })
-
       const response = await fetch(url, {
         method: "GET",
         headers,
@@ -162,24 +169,7 @@ class EveryCREDCredentialsService {
           
           // Check if it's an authentication error
           if (response.status === 401) {
-            // Check if token might be expired
-            try {
-              const tokenParts = config.apiToken.split('.')
-              if (tokenParts.length === 3) {
-                const payload = JSON.parse(atob(tokenParts[1]))
-                const exp = payload.exp
-                const now = Math.floor(Date.now() / 1000)
-                
-                if (exp && now > exp) {
-                  errorMessage = `EveryCRED API token has expired. The token expired on ${new Date(exp * 1000).toISOString()}. Please update NEXT_PUBLIC_EVERYCRED_API_TOKEN in your .env.local file with a new token and restart the server.`
-                } else {
-                  errorMessage = `EveryCRED API authentication failed. Please verify that NEXT_PUBLIC_EVERYCRED_API_TOKEN in your .env.local file is correct and not expired. Error: ${errorJson.message || errorText}`
-                }
-              }
-            } catch (e) {
-              // If we can't parse the token, just use the original error
-              errorMessage = `EveryCRED API authentication failed. Please verify that NEXT_PUBLIC_EVERYCRED_API_TOKEN in your .env.local file is correct. Error: ${errorJson.message || errorText}`
-            }
+            errorMessage = `EveryCRED API authentication failed. Please login again. Error: ${errorJson.message || errorText}`
           }
         } catch {
           errorMessage += `. ${errorText}`
@@ -269,7 +259,12 @@ class EveryCREDCredentialsService {
       (cred.id as string | undefined)
 
     // Extract credential_id
-    const credentialId = cred.credential_id ?? cred.id ?? ""
+    const credentialId =
+      cred.credential_id ??
+      cred.credential_unique_id ??
+      cred.uuid ??
+      cred.id ??
+      ""
 
     // Extract subject fields
     let subjectFields: Record<string, unknown> = {}
@@ -289,6 +284,7 @@ class EveryCREDCredentialsService {
     // Priority: candidate_name > subject_fields.name > student_name > student
     const studentName =
       cred.candidate_name ??
+      cred.name ??
       (subjectFields.name as string) ??
       cred.student_name ??
       cred.student ??
@@ -296,12 +292,17 @@ class EveryCREDCredentialsService {
 
     const studentEmail =
       (subjectFields.email as string) ??
+      cred.candidate_email ??
+      cred.email ??
       cred.student_email ??
       ""
 
     // Extract program
     const program =
       (subjectFields.program as string) ??
+      cred.subject_name ??
+      (cred.record_slug?.["training_title"] as string | undefined) ??
+      (cred.record_slug?.["subject_name"] as string | undefined) ??
       cred.program ??
       ""
 
@@ -309,14 +310,19 @@ class EveryCREDCredentialsService {
     const degree = cred.degree ?? "Bachelor of Technology"
 
     // Extract and format date
-    let issueDate = cred.date ?? cred.issue_date ?? cred.created_at ?? cred.issued_at ?? ""
+    let issueDate =
+      cred.date ??
+      cred.issue_date ??
+      cred.created_at ??
+      cred.issued_at ??
+      ""
     if (issueDate && issueDate.includes("T")) {
       issueDate = issueDate.split("T")[0]
     }
 
     // Construct verification URL
     const verificationUrl = credentialUniqueId
-      ? `https://stg-dcs-verifier-in.everycred.com/${credentialUniqueId}`
+      ? `https://demo-dcs-verifier-us.everycred.com/${credentialUniqueId}`
       : undefined
 
     return {

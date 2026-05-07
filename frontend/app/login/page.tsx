@@ -11,9 +11,11 @@ import { Mail, Lock, GraduationCap, ArrowRight } from "lucide-react"
 import { toast } from "sonner"
 import { api } from "@/lib/api"
 import { authStorage } from "@/lib/auth-storage"
+import { useAuthIssuer } from "@/lib/auth/auth-issuer-context"
 
 export default function LoginPage() {
   const router = useRouter()
+  const { bootstrap } = useAuthIssuer()
   const [email, setEmail] = React.useState("")
   const [password, setPassword] = React.useState("")
   const [loading, setLoading] = React.useState(false)
@@ -56,11 +58,25 @@ export default function LoginPage() {
 
       // Store authentication tokens and user data
       authStorage.setTokens(response.tokens)
-      authStorage.setUser(response.user)
+      authStorage.setUser({
+        ...response.user,
+        username:
+          (response.user as any)?.username ||
+          response.user?.email?.split?.("@")?.[0] ||
+          "user",
+      } as any)
 
       toast.success("Login successful!", {
-        description: `Welcome back, ${response.user.full_name || response.user.username}!`,
+        description: `Welcome back, ${
+          response.user?.full_name ||
+          (response.user as any)?.username ||
+          response.user?.email ||
+          "User"
+        }!`,
       })
+
+      // Hydrate issuer-aware account context before redirect.
+      await bootstrap()
 
       // Redirect to dashboard
       router.push("/dashboard")
@@ -109,7 +125,7 @@ export default function LoginPage() {
               <GraduationCap className="h-8 w-8 text-primary" />
             </div>
             <h1 className="text-2xl font-semibold text-foreground mb-2">Welcome Back</h1>
-            <p className="text-sm text-muted-foreground">Sign in to your EveryCRED LMS account</p>
+            <p className="text-sm text-muted-foreground">Sign in to your LMS RMS account</p>
           </motion.div>
 
           {/* Form */}

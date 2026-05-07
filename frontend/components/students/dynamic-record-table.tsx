@@ -13,6 +13,7 @@ import { motion } from "framer-motion"
 interface DynamicRecordTableProps {
   subjectFields: SubjectField[]
   subjectId: number
+  issuerId?: number
   students: any[]
   onRecordCreated: () => void
   onCancel: () => void
@@ -21,6 +22,7 @@ interface DynamicRecordTableProps {
 export function DynamicRecordTable({
   subjectFields,
   subjectId,
+  issuerId,
   students,
   onRecordCreated,
   onCancel,
@@ -60,7 +62,7 @@ export function DynamicRecordTable({
         }
       })
 
-      await createRecord(subjectId, subjectFieldsData)
+      await createRecord(subjectId, subjectFieldsData, issuerId)
 
       toast.success("Record created successfully!", {
         description: "The record has been added to EveryCRED.",

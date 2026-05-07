@@ -64,9 +64,9 @@ export function EditStudentForm({ open, onOpenChange, student, onSuccess }: Edit
         const newErrors: typeof errors = {}
 
         if (!formData.name.trim()) {
-            newErrors.name = "Student name is required"
+            newErrors.name = "Learner name is required"
         } else if (formData.name.trim().length < 2) {
-            newErrors.name = "Student name must be at least 2 characters"
+            newErrors.name = "Learner name must be at least 2 characters"
         }
 
         if (!formData.email.trim()) {
@@ -76,7 +76,7 @@ export function EditStudentForm({ open, onOpenChange, student, onSuccess }: Edit
         }
 
         if (formData.course_id && (isNaN(Number(formData.course_id)) || Number(formData.course_id) <= 0)) {
-            newErrors.course_id = "Please select a valid course"
+            newErrors.course_id = "Please select a valid training program"
         }
 
         setErrors(newErrors)
@@ -114,7 +114,7 @@ export function EditStudentForm({ open, onOpenChange, student, onSuccess }: Edit
 
             await api.students.update(student.id, studentData)
 
-            toast.success("Student updated successfully!", {
+            toast.success("Learner updated successfully!", {
                 description: `${studentData.name} has been updated.`,
             })
 
@@ -125,7 +125,7 @@ export function EditStudentForm({ open, onOpenChange, student, onSuccess }: Edit
                 onSuccess()
             }
         } catch (error: any) {
-            let errorMessage = "Failed to update student. Please try again."
+            let errorMessage = "Failed to update learner. Please try again."
             
             if (error?.message) {
                 if (typeof error.message === "string") {
@@ -135,7 +135,7 @@ export function EditStudentForm({ open, onOpenChange, student, onSuccess }: Edit
                 }
             }
             
-            toast.error("Failed to update student", {
+            toast.error("Failed to update learner", {
                 description: errorMessage,
             })
         } finally {
@@ -156,9 +156,9 @@ export function EditStudentForm({ open, onOpenChange, student, onSuccess }: Edit
         <GlassDialog open={open} onOpenChange={handleClose}>
             <GlassDialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
                 <GlassDialogHeader>
-                    <GlassDialogTitle className="text-xl sm:text-2xl">Edit Student</GlassDialogTitle>
+                    <GlassDialogTitle className="text-xl sm:text-2xl">Edit Learner</GlassDialogTitle>
                     <GlassDialogDescription>
-                        Update the student details below. Name and email are required.
+                        Update the learner details below. Name and email are required.
                     </GlassDialogDescription>
                 </GlassDialogHeader>
 
@@ -170,7 +170,7 @@ export function EditStudentForm({ open, onOpenChange, student, onSuccess }: Edit
                     >
                         <GlassInput
                             type="text"
-                            placeholder="Student name *"
+                            placeholder="Learner name *"
                             icon={<User className="h-4 w-4" />}
                             value={formData.name}
                             onChange={handleChange("name")}
@@ -341,7 +341,7 @@ export function EditStudentForm({ open, onOpenChange, student, onSuccess }: Edit
                             variant="primary"
                             loading={loading}
                         >
-                            Update Student
+                            Update Learner
                         </GlassButton>
                     </GlassDialogFooter>
                 </form>

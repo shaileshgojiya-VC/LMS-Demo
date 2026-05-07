@@ -9,23 +9,72 @@ import { GlassButton } from "@/components/ui/glass-button"
 import { GlassInput } from "@/components/ui/glass-input"
 import { motion } from "framer-motion"
 import { Plus, Search, Filter, Loader2, AlertCircle } from "lucide-react"
-import { useCoursesList } from "@/lib/hooks/use-api"
 import { Course } from "@/lib/api"
+import { useAuthIssuer } from "@/lib/auth/auth-issuer-context"
+import { everycredSubjectsService, type EveryCREDSubject } from "@/lib/everycred-subjects-service"
 
 export default function CoursesPage() {
-  const { data: coursesListResponse, loading, error, refetch } = useCoursesList(1, 10, "newest")
-  // Response structure: { status: "success", data: { total, pages, size, list: [...] }, message: "..." }
-  const courses = coursesListResponse?.data?.list || []
+  const { activeIssuerId } = useAuthIssuer()
+  const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState<string | null>(null)
+  const [subjects, setSubjects] = React.useState<EveryCREDSubject[]>([])
+  const [search, setSearch] = React.useState("")
   const [isCreateDialogOpen, setIsCreateDialogOpen] = React.useState(false)
+
+  const refetch = React.useCallback(async () => {
+    if (!activeIssuerId) return
+    try {
+      setLoading(true)
+      setError(null)
+      const res = await everycredSubjectsService.listSubjects({
+        page: 1,
+        size: 10,
+        search,
+        order_by: "newest",
+        issuer_id: activeIssuerId,
+      })
+      setSubjects(res.list)
+    } catch (e: any) {
+      setError(e?.message || "Failed to load training programs.")
+      setSubjects([])
+    } finally {
+      setLoading(false)
+    }
+  }, [activeIssuerId, search])
+
+  React.useEffect(() => {
+    if (!activeIssuerId) return
+    refetch()
+  }, [activeIssuerId, refetch])
+
+  const courses: Course[] = React.useMemo(() => {
+    return subjects.map((s) => {
+      const course = {
+        id: s.id,
+        name: s.title || s.name,
+        description: (s.description as any) || null,
+        instructor: null,
+        students: s.issued_cred_count ?? 0,
+        duration: null,
+        modules: s.draft_cred_count ?? 0,
+        status: "active",
+        created_at: s.created_at || new Date().toISOString(),
+        updated_at: s.updated_at || new Date().toISOString(),
+      } as Course & { logo?: string | null }
+
+      course.logo = (s.logo as any) ?? null
+      return course
+    })
+  }, [subjects])
 
   if (loading) {
     return (
       <AppShell>
-        <Header title="Courses" subtitle="Browse and manage all available courses" />
+        <Header title="Training Programs" subtitle="Browse and manage all available training programs" />
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="flex flex-col items-center gap-4">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            <p className="text-muted-foreground">Loading courses...</p>
+            <p className="text-muted-foreground">Loading training programs...</p>
           </div>
         </div>
       </AppShell>
@@ -35,12 +84,12 @@ export default function CoursesPage() {
   if (error) {
     return (
       <AppShell>
-        <Header title="Courses" subtitle="Browse and manage all available courses" />
+        <Header title="Training Programs" subtitle="Browse and manage all available training programs" />
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="flex flex-col items-center gap-4 text-center">
             <AlertCircle className="h-8 w-8 text-destructive" />
             <div>
-              <p className="text-destructive font-medium">Failed to load courses</p>
+              <p className="text-destructive font-medium">Failed to load training programs</p>
               <p className="text-sm text-muted-foreground mt-1">{error}</p>
             </div>
             <GlassButton variant="secondary" onClick={() => refetch()}>
@@ -54,7 +103,7 @@ export default function CoursesPage() {
 
   return (
     <AppShell>
-      <Header title="Courses" subtitle="Browse and manage all available courses" />
+      <Header title="Training Programs" subtitle="Browse and manage all available training programs" />
 
       {/* Actions Bar */}
       <motion.div
@@ -64,7 +113,12 @@ export default function CoursesPage() {
       >
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <div className="flex-1 sm:w-72">
-            <GlassInput placeholder="Search courses..." icon={<Search className="h-4 w-4" />} />
+            <GlassInput
+              placeholder="Search training programs..."
+              icon={<Search className="h-4 w-4" />}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
           <GlassButton variant="secondary" icon={<Filter className="h-4 w-4" />}>
             Filter
@@ -89,8 +143,8 @@ export default function CoursesPage() {
       ) : (
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
-            <p className="text-muted-foreground">No courses found</p>
-            <p className="text-sm text-muted-foreground mt-1">Create your first course to get started</p>
+            <p className="text-muted-foreground">No training programs found</p>
+            <p className="text-sm text-muted-foreground mt-1">Create your first training program to get started</p>
           </div>
         </div>
       )}

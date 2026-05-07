@@ -17,8 +17,9 @@ export function CourseCard({ course, index = 0 }: CourseCardProps) {
   const router = useRouter()
   
   // Map backend data to display format
-  const courseTitle = course.name || "Untitled Course"
+  const courseTitle = course.name || "Untitled Training Program"
   const courseDescription = course.description || "No description available"
+  const logoUrl = (course as any)?.logo as string | undefined
   const instructor = course.instructor || "TBA"
   const instructorInitials = instructor
     .split(" ")
@@ -49,7 +50,9 @@ export function CourseCard({ course, index = 0 }: CourseCardProps) {
   }
 
   const handleCardClick = () => {
-    router.push(`/students?course=${encodeURIComponent(course.id)}&courseName=${encodeURIComponent(courseTitle)}`)
+    router.push(
+      `/students?subject_id=${encodeURIComponent(course.id)}&subjectName=${encodeURIComponent(courseTitle)}`
+    )
   }
 
   return (
@@ -58,7 +61,12 @@ export function CourseCard({ course, index = 0 }: CourseCardProps) {
         {/* Course Image */}
         <div className="h-32 sm:h-40 bg-gradient-to-br from-primary/20 to-accent/20 relative overflow-hidden cursor-pointer shrink-0" onClick={handleCardClick}>
           <img
-            src={`/placeholder.svg?height=160&width=400&query=${courseTitle} course banner education`}
+            src={
+              logoUrl ||
+              `/placeholder.svg?height=160&width=400&query=${encodeURIComponent(
+                `${courseTitle} training program banner`
+              )}`
+            }
             alt={courseTitle}
             className="w-full h-full object-cover"
           />

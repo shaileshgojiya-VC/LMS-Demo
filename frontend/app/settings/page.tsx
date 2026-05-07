@@ -12,7 +12,7 @@ import { Settings, Key, Globe, Bell, Shield, Save } from "lucide-react"
 export default function SettingsPage() {
   return (
     <AppShell>
-      <Header title="Settings" subtitle="Configure your LMS and EveryCRED integration" />
+      <Header title="Settings" subtitle="Configure your LMS RMS and EveryCRED integration" />
 
       <div className="max-w-4xl space-y-6">
         {/* EveryCRED Integration */}
@@ -28,7 +28,7 @@ export default function SettingsPage() {
                   <GlassBadge variant="success" className="text-xs">Connected</GlassBadge>
                 </div>
                 <p className="text-xs sm:text-sm text-muted-foreground mt-1 mb-3 sm:mb-4">
-                  Configure your EveryCRED API credentials for credential issuance
+                  Configure your EveryCRED API credentials for certification issuance
                 </p>
                 <div className="space-y-4">
                   <GlassInput
@@ -58,7 +58,7 @@ export default function SettingsPage() {
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm sm:text-base font-semibold text-foreground">Institution Settings</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground mt-1 mb-3 sm:mb-4">
-                  Configure your institution details for credentials
+                  Configure your institution details for certifications
                 </p>
                 <div className="space-y-4">
                   <GlassInput placeholder="Institution Name" defaultValue="Demo University" />
@@ -81,7 +81,7 @@ export default function SettingsPage() {
                 <p className="text-xs sm:text-sm text-muted-foreground mt-1 mb-3 sm:mb-4">Configure email and system notifications</p>
                 <div className="space-y-3">
                   {[
-                    { label: "Email on credential issuance", enabled: true },
+                    { label: "Email on certification issuance", enabled: true },
                     { label: "Email on verification", enabled: true },
                     { label: "Weekly summary reports", enabled: false },
                   ].map((item) => (

@@ -59,9 +59,9 @@ export function EditCourseForm({ open, onOpenChange, course, onSuccess }: EditCo
     const newErrors: typeof errors = {}
 
     if (!formData.name.trim()) {
-      newErrors.name = "Course name is required"
+      newErrors.name = "Training program name is required"
     } else if (formData.name.trim().length < 3) {
-      newErrors.name = "Course name must be at least 3 characters"
+      newErrors.name = "Training program name must be at least 3 characters"
     }
 
     if (formData.duration && (isNaN(Number(formData.duration)) || Number(formData.duration) < 0)) {
@@ -106,7 +106,7 @@ export function EditCourseForm({ open, onOpenChange, course, onSuccess }: EditCo
 
       await api.courses.update(course.id, courseData)
 
-      toast.success("Course updated successfully!", {
+      toast.success("Training program updated successfully!", {
         description: `${courseData.name} has been updated.`,
       })
 
@@ -117,7 +117,7 @@ export function EditCourseForm({ open, onOpenChange, course, onSuccess }: EditCo
         onSuccess()
       }
     } catch (error: any) {
-      let errorMessage = "Failed to update course. Please try again."
+      let errorMessage = "Failed to update training program. Please try again."
       
       if (error?.message) {
         if (typeof error.message === "string") {
@@ -127,7 +127,7 @@ export function EditCourseForm({ open, onOpenChange, course, onSuccess }: EditCo
         }
       }
       
-      toast.error("Failed to update course", {
+      toast.error("Failed to update training program", {
         description: errorMessage,
       })
     } finally {
@@ -148,9 +148,9 @@ export function EditCourseForm({ open, onOpenChange, course, onSuccess }: EditCo
     <GlassDialog open={open} onOpenChange={handleClose}>
       <GlassDialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <GlassDialogHeader>
-          <GlassDialogTitle className="text-xl sm:text-2xl">Edit Course</GlassDialogTitle>
+          <GlassDialogTitle className="text-xl sm:text-2xl">Edit Training Program</GlassDialogTitle>
           <GlassDialogDescription>
-            Update the course details below. Only the course name is required.
+            Update the training program details below. Only the training program name is required.
           </GlassDialogDescription>
         </GlassDialogHeader>
 
@@ -162,7 +162,7 @@ export function EditCourseForm({ open, onOpenChange, course, onSuccess }: EditCo
           >
             <GlassInput
               type="text"
-              placeholder="Course name *"
+              placeholder="Training program name *"
               icon={<BookOpen className="h-4 w-4" />}
               value={formData.name}
               onChange={handleChange("name")}
@@ -177,7 +177,7 @@ export function EditCourseForm({ open, onOpenChange, course, onSuccess }: EditCo
             transition={{ delay: 0.2 }}
           >
             <textarea
-              placeholder="Course description"
+              placeholder="Training program description"
               value={formData.description}
               onChange={handleChange("description")}
               rows={3}
@@ -303,7 +303,7 @@ export function EditCourseForm({ open, onOpenChange, course, onSuccess }: EditCo
               variant="primary"
               loading={loading}
             >
-              Update Course
+              Update Training Program
             </GlassButton>
           </GlassDialogFooter>
         </form>
